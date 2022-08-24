@@ -7,9 +7,8 @@ export function NoteList({ notes }) {
     return <Link to={"/notes/"}>
 
         <article >
-            {notes.map(note => {
-                <NotePreview note={note} key={note.id} />
-            })}
+            {notes.map(note => <NotePreview note={note} key={note.id} />
+            )}
         </article>
     </Link>
 }
