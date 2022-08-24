@@ -23,4 +23,7 @@
 @import './apps/email/views/mail-list.css';
 @import './apps/email/views/mail-editor.css';
 
-/* Keep */
+/* Notes */
+
+@import 'apps/note/views/note-preview.css';
+@import 'apps/note/views/note-create.css';
