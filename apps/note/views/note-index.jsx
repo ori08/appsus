@@ -25,12 +25,14 @@ export class NoteIndex extends React.Component {
     //     this.setState({ filterBy }, this.loadNotes)
     // }
 
+    
 
     render() {
-        const {notes,selectedNote}=this.state
+        const { notes, selectedNote } = this.state
         return (
             <section>
-                <CreateNote/>
+                {this.handleChange}
+                <CreateNote />
                 <NoteList notes={notes} />
             </section>
 

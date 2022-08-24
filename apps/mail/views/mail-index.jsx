@@ -55,7 +55,7 @@ function onAddMail(ev) {
     mailService.addNewMail(ev).then(
         location.reload()
     )
-    
+
 }
 
 export { onAddMail }
