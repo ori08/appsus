@@ -21,7 +21,6 @@ export function Home() {
 // font Roboto
 
 // KEEP
-
 //logo color black
 // background = white
 // font color rgb(32 33 36)

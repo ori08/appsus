@@ -1,4 +1,4 @@
-import { utilService } from "../../../js/services/util.service"
+import { utilService } from "../../../js/services/util.service.js"
 
 const KEY = 'notesDB'
 
