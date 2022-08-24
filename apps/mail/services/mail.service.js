@@ -76,7 +76,7 @@ function query(filterBy) {
 function getById(mailId) {
     if (!mailId) return Promise.resolve(null)
     const mails = _loadFromStorage()
-    const mail = mails.find(book => mailId === book.id)
+    const mail = mails.find(mail => mailId === mail.id)
     return Promise.resolve(mail)
 }
 
@@ -106,7 +106,7 @@ function getVendors() {
 }
 
 function _createMail(username, subject, massage) {
-    return {
+    var mail = {
         id: utilService.makeId(),
         username,
         massage,
@@ -115,6 +115,8 @@ function _createMail(username, subject, massage) {
         isRead: false,
         date: null
     }
+
+    return mail
 }
 
 function _createMails() {
@@ -142,7 +144,7 @@ function addNewMail(ev) {
     const mail = _createMail(username, subject, massage)
     mails.unshift(mail)
     _saveToStorage(mails)
-    return Promise.resolve(mails)
+    // return Promise.resolve(mails)
 }
 
 

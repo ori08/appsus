@@ -4,6 +4,7 @@ import { Home } from "./js/views/home.jsx"
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
 import { MailEditor } from "./apps/mail/views/mail-editor.jsx"
 import { NoteIndex } from "./apps/note/views/note-index.jsx"
+import { MailInfo } from "./apps/mail/cmps/mail-info.jsx"
 
 const Router = ReactRouterDOM.HashRouter
 const { Route, Switch } = ReactRouterDOM
@@ -14,6 +15,7 @@ export function App() {
             <AppHeader />
             <Switch>
                 <Route path="/mail/edit/:mailId?" component={MailEditor} />
+                <Route path="/mail/info/:mailId?" component={MailInfo} />
                 <Route path="/mail" component={MailIndex} />
                 <Route path="/notes" component={NoteIndex} />
                 <Route path="/about" component={About} />
