@@ -1,8 +1,8 @@
 const { Link } = ReactRouterDOM
-
+import { MailInfo } from "./mail-info"
 export function MailList({ mail: mail }) {
 
-    return <Link to={"/mail/" + mail.id}>
+    return <Link to={"/mail/info/" + mail.id}>
         <article >
             <div className="mailLink">
                 <div className="padding">

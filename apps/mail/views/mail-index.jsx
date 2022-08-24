@@ -33,6 +33,7 @@ export class MailIndex extends React.Component {
 
     render() {
         const { mails } = this.state
+
         return <section className="mail-app">
             <div className="flex">
                 <div className="mail-side-bar">
