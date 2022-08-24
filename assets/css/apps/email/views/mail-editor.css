@@ -11,7 +11,7 @@
 }
 
 .padding {
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     padding-left: 15px;
     padding-right: 15px;
@@ -19,7 +19,7 @@
     gap: 10px;
 }
 
-.date {
+/* .date {
     flex-basis: 10%;
     display: flex;
     justify-self: flex-end;
@@ -33,11 +33,11 @@
 
 .massage {
     flex-basis: 80%;
-}
+} */
 
 input {
     margin-left: 10px;
-    width: 100vw;
+    /* width: 100vw; */
     border: 2px black solid;
     border-radius: 5px;
 }

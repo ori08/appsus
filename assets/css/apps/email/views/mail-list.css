@@ -1,0 +1,21 @@
+.mail-side-bar {
+    background-color: rgb(246, 248, 252);
+    height: 100vh;
+    flex-basis: 18.82%;
+}
+
+.mail-list-container {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    flex-basis: 76.25%;
+}
+
+.side-bar-contect {
+    display: flex;
+    flex-direction: column;
+}
+
+.additional-app {
+    background-color: rgb(246, 248, 252);
+    flex-basis: 4.93%;
+}

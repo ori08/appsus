@@ -7,6 +7,7 @@ export const mailService = {
     getVendors,
     save,
     _loadFromStorage,
+    addNewMail
 }
 
 const KEY = 'mailsDB'
@@ -15,6 +16,7 @@ const defaultMails = {
     admin: {
         id: utilService.makeId(),
         username: 'Admin',
+        subject: 'Welcome',
         massage: 'Im so glad you decide to try out MailBaba \n here few tips to get you up and running fast',
         pics: [],
         isRead: false,
@@ -23,6 +25,7 @@ const defaultMails = {
     supportTeam: {
         id: utilService.makeId(),
         username: 'Support Team:',
+        subject: 'support',
         massage: 'Hi, Dani from MailBaba support team \n Thanks for chosen MailBaba \n Im here for any technical problem. \n U are welcome',
         pics: [],
         isRead: false,
@@ -31,6 +34,7 @@ const defaultMails = {
     Spam: {
         id: utilService.makeId(),
         username: 'Spam',
+        subject: 'Package from California',
         massage: ' Your package is pending: \n, we came across a package from a recent month pending for you',
         pics: [],
         isRead: false,
@@ -101,11 +105,12 @@ function getVendors() {
     return gVendors
 }
 
-function _createMail() {
+function _createMail(username, subject, massage) {
     return {
         id: utilService.makeId(),
-        username: null,
-        massage: null,
+        username,
+        massage,
+        subject,
         pics: [],
         isRead: false,
         date: null
@@ -126,6 +131,23 @@ function _createMails() {
     }
     return mails
 }
+
+function addNewMail(ev) {
+    ev.preventDefault()
+    let mails = _loadFromStorage()
+    console.log(mails);
+    const username = ev.target[0].value
+    const subject = ev.target[1].value
+    const massage = ev.target[2].value
+    const mail = _createMail(username, subject, massage)
+    mails.unshift(mail)
+    _saveToStorage(mails)
+    return Promise.resolve(mails)
+}
+
+
+
+
 
 function _saveToStorage(mails) {
     saveToStorage(KEY, mails)

@@ -1,5 +1,7 @@
 import { mailService } from "../services/mail.service.js"
 import { utilService } from '../../../js/services/util.service.js'
+import { MailIndex } from "./mail-index.jsx"
+import { onAddMail } from "./mail-index.jsx"
 
 export class MailEditor extends React.Component {
 
@@ -15,9 +17,11 @@ export class MailEditor extends React.Component {
     }
 
 
+
+
     render() {
         return <section className="book-edit">
-            <form className="flex column " >
+            <form className="flex column " onSubmit={() => onAddMail(event)}>
                 <div className="flex">
                     <h1>To</h1>
                     <input type="mail" />
@@ -29,6 +33,7 @@ export class MailEditor extends React.Component {
                 <textarea name="" id="" cols="100" rows="20"></textarea>
                 <button className="send-btn">send</button>
             </form>
-        </section>
+        </section >
     }
 }
+
