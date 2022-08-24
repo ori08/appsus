@@ -1,0 +1,57 @@
+.mailLink {
+    display: flex;
+    background-color: white;
+    border: 1px solid rgb(141, 141, 141);
+    border-top: none;
+}
+
+.mail-conatiner {
+    display: flex;
+    flex-direction: column;
+}
+
+.padding {
+    width: 100vw;
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    gap: 10px;
+}
+
+.date {
+    flex-basis: 10%;
+    display: flex;
+    justify-self: flex-end;
+    text-align: right;
+    float: right;
+}
+
+.username {
+    flex-basis: 10%;
+}
+
+.massage {
+    flex-basis: 80%;
+}
+
+input {
+    margin-left: 10px;
+    width: 100vw;
+    border: 2px black solid;
+    border-radius: 5px;
+}
+
+textarea {
+    border: 2px black solid;
+    border-radius: 5px;
+}
+
+.send-btn {
+    width: 100px;
+}
+
+form {
+    margin-top: 3px;
+    gap: 3px;
+}
