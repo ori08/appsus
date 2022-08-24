@@ -6,7 +6,8 @@ header {
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    height: 64px;
 }
 
 nav a {
@@ -21,4 +22,19 @@ nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
+}
+
+
+.logo {
+    height: 30px;
+    width: 100px;
+
+}
+
+.burger-icon {
+    width: 25px;
+    height: 25px;
+    margin-left: 27px;
+    margin-right: 20px;
+
 }

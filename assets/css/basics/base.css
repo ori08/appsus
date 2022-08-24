@@ -16,8 +16,18 @@ a {
     color: inherit;
 }
 
+p {
+    font-size: 14px;
+}
+
 img {
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }

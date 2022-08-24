@@ -8,8 +8,11 @@ const { Link } = ReactRouterDOM
 export class MailIndex extends React.Component {
     state = {
         mails: [],
-        filterBy: null
+        filterBy: null,
+        isNewMail: false
     }
+
+
 
     componentDidMount() {
         console.log('this.props', this.props);
@@ -26,6 +29,9 @@ export class MailIndex extends React.Component {
         this.setState({ filterBy }, this.loadMails)
     }
 
+    onNewMail = () => {
+        this.setState({ isNewMail: true })
+    }
 
     onGoBack = () => {
         this.props.history.push('/mail')
@@ -37,7 +43,7 @@ export class MailIndex extends React.Component {
         return <section className="mail-app">
             <div className="flex">
                 <div className="mail-side-bar">
-                    <MailSideBar />
+                    <MailSideBar mails={mails} />
                 </div>
                 <div className="mail-list-container">
                     <MailContainer mails={mails} />
@@ -45,6 +51,7 @@ export class MailIndex extends React.Component {
                 <div className="additional-app">
                     <AdditionalApp />
                 </div>
+
             </div>
         </section>
     }
@@ -55,7 +62,7 @@ function onAddMail(ev) {
     mailService.addNewMail(ev).then(
         location.reload()
     )
-    
+
 }
 
 export { onAddMail }

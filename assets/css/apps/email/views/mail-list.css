@@ -14,8 +14,9 @@
     background-color: rgb(255, 255, 255);
     height: 100vh;
     flex-basis: 76.25%;
-    text-align: center;
-    margin-top: 50px;
+
+    margin-top: 8px;
+
 
 }
 
@@ -27,4 +28,44 @@
 .additional-app {
     background-color: rgb(246, 248, 252);
     flex-basis: 4.93%;
+}
+
+
+
+.mail-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.side-bar-padding {
+    padding-top: 24px;
+    padding-left: 28px;
+}
+
+.sidebar-icons {
+    padding-bottom: 16px;
+    gap: 8px;
+}
+
+.compose {
+    margin-left: 8px;
+    margin-top: 8px;
+    height: 55px;
+    width: 120px;
+    background-color: rgb(194, 230, 254);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.compose-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.compose-btn {
+
+    display: flex;
+    align-content: center;
 }
