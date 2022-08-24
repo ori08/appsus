@@ -18,24 +18,38 @@ export class NoteIndex extends React.Component {
     loadNotes = () => {
         noteService.query(this.state.filterBy)
             .then((notes) => this.setState({ notes }))
-            .then(console.log('adding notes'))
     }
 
+    onSelectedBook = (noteId) => {
+        noteService.getById(noteId)
+            .then(note => {
+                // console.log({selectedNote})
+                this.setState({ selectedNote: note })
+                // noteService.getById(noteId)
+                console.log(note.id)
+            })
+    }
+
+    onRemoveBook = (bookId) => {
+        bookService.remove(bookId)
+            .then(() => {
+                console.log({notes})
+            })
+    }
+    
     // onSetFilter = (filterBy) => {
     //     this.setState({ filterBy }, this.loadNotes)
     // }
 
-    
+
 
     render() {
         const { notes, selectedNote } = this.state
         return (
-            <section>
-                {this.handleChange}
+            <section className="main-index">
                 <CreateNote />
-                <NoteList notes={notes} />
+                <NoteList notes={notes} onSelectedBook={this.onSelectedBook} />
             </section>
-
         )
     }
 }

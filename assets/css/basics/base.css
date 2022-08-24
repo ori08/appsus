@@ -32,3 +32,8 @@ button {
     border: none;
     background-color: transparent;
 }
+
+article {
+    cursor: auto;
+}
+

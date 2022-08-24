@@ -2,12 +2,12 @@ import { NotePreview } from "./note-preview.jsx"
 
 const { Link } = ReactRouterDOM
 
-export function NoteList({ notes }) {
+export function NoteList({ notes , onSelectedBook }) {
 
     return <Link to={"/notes/"}>
 
-        <article >
-            {notes.map(note => <NotePreview note={note} key={note.id} />)}
-        </article>
+        <section className="note-list">
+            {notes.map(note => <NotePreview note={note} key={note.id} onSelectedBook={onSelectedBook} />)}
+        </section>
     </Link>
 }
