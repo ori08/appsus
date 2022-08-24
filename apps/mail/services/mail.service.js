@@ -1,5 +1,5 @@
-import { storageService } from '../../../services/storage.service.js'
-import { utilService } from '../../../services/util.service.js'
+import { utilService } from '../../../js/services/util.service.js'
+import { storageService } from '../../../js/services/storage.service'
 
 export const mailService = {
     getById,
@@ -128,9 +128,19 @@ function _createMails() {
 }
 
 function _saveToStorage(mails) {
-    storageService.saveToStorage(KEY, mails)
+    saveToStorage(KEY, mails)
 }
 
 function _loadFromStorage() {
-    return storageService.loadFromStorage(KEY)
+    return loadFromStorage(KEY)
+}
+
+
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
 }

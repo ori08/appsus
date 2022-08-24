@@ -1,5 +1,5 @@
 import { mailService } from "../services/mail.service.js"
-import { utilService } from "../services/util.service.js"
+import { utilService } from '../../../js/services/util.service.js'
 
 export class MailEditor extends React.Component {
 

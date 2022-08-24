@@ -1,5 +1,4 @@
-import { eventBusService } from '../../services/event-bus.service.js'
-
+// import { eventBusService } from '../../../js/services/event-bus.service'
 
 export class UserMsg extends React.Component {
   unsubscribe
@@ -18,13 +17,13 @@ export class UserMsg extends React.Component {
     this.unsubscribe()
   }
 
-  closeMsg = ()=>{
+  closeMsg = () => {
     this.setState({ msg: null })
   }
 
   render() {
-    const {msg} = this.state
-    const {closeMsg} = this
+    const { msg } = this.state
+    const { closeMsg } = this
 
     if (!msg) return <span></span>
     return (
