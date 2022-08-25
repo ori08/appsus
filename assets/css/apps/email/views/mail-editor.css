@@ -36,6 +36,9 @@
 
 .massage {
     flex-basis: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 input {
