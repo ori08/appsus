@@ -6,7 +6,8 @@ export const noteService = {
     query,
     getById,
     addNote,
-    removeNote
+    removeNote,
+    colorPicker
 }
 
 export function query(filterBy) {
@@ -40,6 +41,18 @@ function _createNote(title, txt, backgroundColor = 'transparent') {
         todos: []
     }
 }
+
+function colorPicker(noteId){
+let notes=_loadFromStorage()
+notes.map(note=>{
+if(note.id===noteId){
+    note.style.backgroundColor="red"
+}
+})
+_saveToStorage(notes)
+}
+
+
 
 function _createNotes() {
     const notes = []
@@ -119,6 +132,9 @@ const expNotes = [
             txt: "Fullstack Me Baby!",
             title: "Code4Life"
         },
+        style: {
+            backgroundColor: "#00d"
+        }
     },
     {
         id: utilService.makeId(),
@@ -148,7 +164,10 @@ const expNotes = [
                     txt: "Coding power",
                     doneAt: 187111111
                 }
-            ]
+            ],
+            style: {
+                backgroundColor: "#00d"
+            }
         }
     }
 ]

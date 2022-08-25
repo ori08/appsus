@@ -45,3 +45,7 @@
 .note-title{
     margin-top: 10px;
 }
+
+input.color-picker{
+    z-index: 20;
+}

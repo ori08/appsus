@@ -10,21 +10,15 @@ h4,
 h5,
 h6 {
     margin: 0;
-    display: flex;
-    align-items: center;
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    display: flex;
-    flex-direction: row;
 }
 
 p {
     font-size: 14px;
-    margin-block-start: 0px;
-    margin-block-end: 0px;
 }
 
 img {
@@ -39,14 +33,7 @@ button {
     background-color: transparent;
 }
 
-<<<<<<< HEAD
-nav {
-    display: flex;
-    flex-direction: row;
-}
-=======
 article {
     cursor: auto;
 }
 
->>>>>>> 00154becb714e25d01d8197f86e2b9a8dead475f

@@ -2,7 +2,7 @@ import { NotePreview } from "./note-preview.jsx"
 
 const { Link } = ReactRouterDOM
 
-export function NoteList({ notes , onRemoveNote }) {
+export function NoteList({ notes, onRemoveNote }) {
 
     return <Link to={"/notes/"}>
 
