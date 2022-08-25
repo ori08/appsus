@@ -8,7 +8,7 @@ export function Home() {
         <i className="fa-regular fa-clock"></i> clock
         <i className="fa-regular fa-paper-plane"></i> sent
         <i className="fa-regular fa-trash-can"></i> trash
-        </section>
+    </section>
 }
 //GMAIL
 

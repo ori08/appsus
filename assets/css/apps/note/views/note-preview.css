@@ -12,7 +12,7 @@
     page-break-inside: avoid;
 }
 
-.note-preview:first-child{
+.note-preview:first-child {
     margin-top: 0;
 }
 
@@ -42,10 +42,10 @@
     word-wrap: break-word;
 }
 
-.note-title{
+.note-title {
     margin-top: 10px;
 }
 
-input.color-picker{
+input.color-picker {
     z-index: 20;
 }

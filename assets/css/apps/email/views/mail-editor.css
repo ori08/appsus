@@ -1,74 +1,89 @@
-.mailLink {
-    display: flex;
-    background-color: white;
-    width: 100%;
-    height: 40px;
-    border: 2px solid rgb(246, 248, 252);
-    border-top: none;
+.mail-side-bar {
+    background-color: rgb(246, 248, 252);
+    height: 100vh;
+    flex-basis: 18.82%;
 }
 
-.mail-conatiner {
+.mail-list-container {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    flex-basis: 76.25%;
+}
+
+.mail-info-container {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    flex-basis: 76.25%;
+
+    margin-top: 8px;
+
+
+}
+
+.side-bar-contect {
     display: flex;
     flex-direction: column;
 }
 
-.padding {
-    /* width: 100vw; */
+.additional-app {
+    background-color: rgb(246, 248, 252);
+    flex-basis: 4.93%;
+}
+
+
+
+.mail-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.side-bar-padding {
+    padding-top: 24px;
+
+}
+
+.sidebar-icons {
+    padding-left: 28px;
+    padding-bottom: 16px;
+    gap: 8px;
+}
+
+.compose {
+    margin-left: 8px;
+    margin-top: 8px;
+    height: 55px;
+    width: 120px;
+    background-color: rgb(194, 230, 254);
     display: flex;
-    padding-left: 15px;
-    padding-right: 15px;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    border-radius: 15px;
 }
 
-.date {
-    flex-basis: 10%;
+.compose-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.compose-btn {
+
     display: flex;
-    justify-self: flex-end;
-    text-align: right;
-    float: right;
+    align-content: center;
 }
 
-.username {
-    /* flex-basis: 10%; */
-    width: 10vw;
-}
+.mail-link-icons {
 
-.massage {
-    flex-basis: 80%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-input {
-    margin-left: 10px;
-    /* width: 100vw; */
-    border: 2px black solid;
-    border-radius: 5px;
-}
-
-textarea {
-    border: 2px black solid;
-    border-radius: 5px;
-}
-
-.send-btn {
-    width: 100px;
-}
-
-form {
-    margin-top: 3px;
+    flex-basis: 8%;
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    margin-right: 8px;
     gap: 3px;
 }
 
-.tool-bar {
+.mail-link-cotext {
+    width: 70vw;
     display: flex;
-    gap: 20px;
-    margin-left: 73px;
-    margin-bottom: 40px;
-}
-
-.padding-mail-info {
-    margin-left: 73px;
+    align-items: center;
 }

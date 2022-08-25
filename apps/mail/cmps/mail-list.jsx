@@ -45,9 +45,6 @@ export class MailList extends React.Component {
                         <p className="date">{mail.date}</p>
                     </Link>
                 </div>
-                <img className="mail-icon" onClick={() => this.mark(mail.id, 'important')} src="assets/pics/asset 28.png" />
-
-
             </div>
         </article>
     }
