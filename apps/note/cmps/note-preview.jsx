@@ -25,7 +25,6 @@ export class NotePreview extends React.Component {
     showColorModal = () => {
         const { note } = this.state
         var el = document.querySelector(`.${note.id}`)
-        console.log(el);
         if (el.style.display === "none") el.style.display = 'flex'
         else el.style.display = "none"
 
@@ -38,8 +37,12 @@ export class NotePreview extends React.Component {
         const color = "red"
 
         const { note } = this.state
-        console.log(note);
         return <article className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
+            {note.info.url && <img className='note-url' src={note.info.url} alt="" />}
+            {note.info.yt && <iframe src={note.info.yt}
+                frameborder="0" allow="autoplay; encrypted-media"
+                allowfullscreen title="video" />
+            }
             <h1 className='note-title'>{note.info.title}</h1>
             <p className='note-txt'>{note.info.txt}</p>
             <div className='note-controls flex' >
@@ -48,11 +51,13 @@ export class NotePreview extends React.Component {
 
             </div>
             <div className={note.id} style={{ display: 'none' }}>
-                <button className="btn-color" onClick={() => this.onColorPicker('#add8e6')} style={{ backgroundColor: "#add8e6" }} value="#add8e6"></button>
-                <button className="btn-color" onClick={() => this.onColorPicker('#f08080')} style={{ backgroundColor: "#f08080" }} value="#f08080"> </button>
-                <button className="btn-color" onClick={() => this.onColorPicker('#fafad2')} style={{ backgroundColor: "#fafad2" }} value="#fafad2"> </button>
-                <button className="btn-color" onClick={() => this.onColorPicker('#90ee90')} style={{ backgroundColor: "#90ee90" }} value="#90ee90"> </button>
-                <button className="btn-color" onClick={() => this.onColorPicker('#ffa07a')} style={{ backgroundColor: "#ffa07a" }} value="#ffa07a"> </button>
+                <div className="color-palette">
+                    <button className="btn-color" onClick={() => this.onColorPicker('#add8e6')} style={{ backgroundColor: "#add8e6" }} value="#add8e6"></button>
+                    <button className="btn-color" onClick={() => this.onColorPicker('#f08080')} style={{ backgroundColor: "#f08080" }} value="#f08080"> </button>
+                    <button className="btn-color" onClick={() => this.onColorPicker('#fafad2')} style={{ backgroundColor: "#fafad2" }} value="#fafad2"> </button>
+                    <button className="btn-color" onClick={() => this.onColorPicker('#90ee90')} style={{ backgroundColor: "#90ee90" }} value="#90ee90"> </button>
+                    <button className="btn-color" onClick={() => this.onColorPicker('#ffa07a')} style={{ backgroundColor: "#ffa07a" }} value="#ffa07a"> </button>
+                </div>
             </div>
         </article>
     }

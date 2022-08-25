@@ -24,7 +24,7 @@ export function query(filterBy) {
     return Promise.resolve(notes)
 }
 
-function _createNote(title, txt, backgroundColor = 'transparent') {
+function _createNote(title, txt, url = '', backgroundColor = 'transparent', yt = '') {
 
     return {
         id: utilService.makeId(),
@@ -33,7 +33,7 @@ function _createNote(title, txt, backgroundColor = 'transparent') {
         info: {
             title,
             txt,
-            url: ''
+            url,
         },
         style: {
             backgroundColor
@@ -93,20 +93,28 @@ function addNote(ev) {
     ev.preventDefault()
 
     const note = []
-    const newNote = []
     let name
     let value
 
     for (var i = 0; i < ev.target.length; i++) {
-        if (ev.target[i].value) {
-            console.log(ev.target[i].value)
-            name = ev.target[i].name
-            value = ev.target[i].value
-            note.push([name] = value)
+        {
+            if (ev.target[i].value.includes('youtube')) {
+                const embed = ev.target[i].value.split('=')
+                note.push(embed[1])
+            }
+            if (ev.target[i].value) {
+                name = ev.target[i].name
+                value = ev.target[i].value
+            }
+            if (value) {
+                console.log('Name: ', name)
+                console.log('Value: ', value)
+                note.push(value)
+            }
         }
     }
     console.log('NEW NOTE:', note)
-    notes.push(_createNote(note[0], note[1]))
+    notes.push(_createNote(note[0], note[1], note[2] ? note[2] : null))
     console.log('notes', notes)
 
     saveToStorage(KEY, notes)
@@ -134,22 +142,22 @@ const expNotes = [
         isPinned: true,
         info: {
             txt: "Fullstack Me Baby!",
-            title: "Code4Life"
+            title: "Code4Life👨‍💻👨‍💻👨‍💻"
         },
         style: {
-            backgroundColor: "#00d"
+            backgroundColor: "lavender"
         }
     },
     {
         id: utilService.makeId(),
         type: "note-img",
         info: {
-            url: "http://some-img/me",
+            url: "https://ichef.bbci.co.uk/news/976/cpsprodpb/DD91/production/_125912765_nasas-webb-reveals-cosmic-cliffs-glittering-landscape-of-star-birth_52211883534_o.png",
             txt: 'theres supposed to be an img here!',
             title: "Bobi and Me"
         },
         style: {
-            backgroundColor: "#00d"
+            backgroundColor: "orange"
         }
     },
 
@@ -171,7 +179,7 @@ const expNotes = [
             ],
         },
         style: {
-            backgroundColor: "#00d"
+            backgroundColor: "grey"
         }
     }
 ]
