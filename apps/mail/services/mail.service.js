@@ -25,6 +25,7 @@ const defaultMails = {
         pics: [],
         isRead: false,
         isStarrad: false,
+        isImportant: false,
         isRemoved: false,
         isSelected: false,
         date: getCurrDate()
@@ -38,6 +39,7 @@ const defaultMails = {
         pics: [],
         isRead: false,
         isStarrad: false,
+        isImportant: false,
         isRemoved: false,
         isSelected: false,
         date: getCurrDate()
@@ -51,6 +53,7 @@ const defaultMails = {
         pics: [],
         isRead: false,
         isStarrad: false,
+        isImportant: false,
         isRemoved: false,
         isSelected: false,
         date: getCurrDate()
@@ -155,6 +158,7 @@ function _createMail(username, subject, massage) {
         pics: [],
         isRead: false,
         isStarrad: false,
+        isImportant: false,
         isRemoved: false,
         isSelected: false,
         date: null
@@ -190,17 +194,43 @@ function addNewMail(ev) {
     // return Promise.resolve(mails)
 }
 
-function markAsSelected(mailId) {
+function markAsSelected(mailId, type) {
     let mails = _loadFromStorage()
     let markedMail = null
-    mails.map(mail => {
-        if (mail.id === mailId) {
-            console.log(mail.isStarrad);
-            if (mail.isStarrad) mail.isStarrad = false
-            else mail.isStarrad = true
-            markedMail = mail
+
+    switch (type) {
+        case 'starrad': {
+            mails.map(mail => {
+                if (mail.id === mailId) {
+                    if (mail.isStarrad) mail.isStarrad = false
+                    else mail.isStarrad = true
+                    markedMail = mail
+                }
+            })
         }
-    })
+            break
+        case 'selected': {
+            mails.map(mail => {
+                if (mail.id === mailId) {
+                    if (mail.isSelected) mail.isSelected = false
+                    else mail.isSelected = true
+                    markedMail = mail
+                }
+            })
+        }
+            break
+        case 'importent': {
+            mails.map(mail => {
+                if (mail.id === mailId) {
+                    if (mail.isImportant) mail.isImportant = false
+                    else mail.isImportant = true
+                    markedMail = mail
+                }
+            })
+        }
+            break
+    }
+
     _saveToStorage(mails)
     return Promise.resolve(markedMail)
 }

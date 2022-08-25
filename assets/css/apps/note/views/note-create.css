@@ -42,3 +42,9 @@ form textarea {
     font-size: 0.8rem;
     resize: none;
 }
+
+.btn-color {
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 50%;
+}
