@@ -9,16 +9,16 @@ export const noteService = {
 }
 
 export function query(filterBy) {
-
-    notes = loadFromStorage()
+    notes = _loadFromStorage()
     if (!notes) {
         notes = _createNotes()
-        saveToStorage(KEY, notes)
+        _saveToStorage(notes)
     }
 
     if (filterBy) {
         return console.log('nada')
     }
+
     return Promise.resolve(notes)
 }
 
@@ -43,19 +43,18 @@ function _createNote(title, txt, backgroundColor = 'transparent') {
 function _createNotes() {
     const notes = []
     for (let i = 0; i < expNotes.length; i++) {
-        console.log(expNotes[i])
         notes.push(expNotes[i])
     }
     return notes
 }
 
-// function _saveToStorage(notes) {
-//     storageService.saveToStorage(KEY, notes)
-// }
+function _saveToStorage(notes) {
+    saveToStorage(KEY, notes)
+}
 
-// function _loadFromStorage() {
-//     return storageService.loadFromStorage(KEY)
-// }
+function _loadFromStorage() {
+    return loadFromStorage(KEY)
+}
 
 function saveToStorage(key, val) {
     localStorage.setItem(key, JSON.stringify(val))
@@ -75,11 +74,12 @@ function getById(noteId) {
 
 function addNote(ev) {
     ev.preventDefault()
-    console.log('notes', notes)
+
     const note = []
     const newNote = []
     let name
     let value
+
     for (var i = 0; i < ev.target.length; i++) {
         if (ev.target[i].value) {
             console.log(ev.target[i].value)
@@ -89,8 +89,10 @@ function addNote(ev) {
         }
     }
     console.log('NEW NOTE:', note)
-    notes.push(_createNote(note[0],note[1]))
+    notes.push(_createNote(note[0], note[1]))
     console.log('notes', notes)
+
+    saveToStorage(KEY, notes)
 
 
     // const value = ev.target.value
@@ -100,13 +102,21 @@ function addNote(ev) {
     // return Promise.resolve(mails)
 }
 
+function removeNote(noteId) {
+    let notes = _loadFromStorage()
+    notes = notes.filter(note => note.id !== noteId)
+    _saveToStorage(notes)
+    return Promise.resolve()
+}
+
 const expNotes = [
     {
         id: utilService.makeId(),
         type: "note-txt",
         isPinned: true,
         info: {
-            txt: "Fullstack Me Baby!"
+            txt: "Fullstack Me Baby!",
+            title: "Code4Life"
         },
     },
     {
@@ -114,6 +124,7 @@ const expNotes = [
         type: "note-img",
         info: {
             url: "http://some-img/me",
+            txt: 'theres supposed to be an img here!',
             title: "Bobi and Me"
         },
         style: {
@@ -125,10 +136,11 @@ const expNotes = [
         id: utilService.makeId(),
         type: "note-todos",
         info: {
+            txt: "Driving liscence",
+            title: "My Info",
             label: "Get my stuff together",
             todos: [
                 {
-                    txt: "Driving liscence",
                     doneAt: null
                 },
                 {

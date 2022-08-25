@@ -16,6 +16,7 @@
 } */
 
 form {
+
     position: relative;
     max-width: 400px;
     margin: 32px auto 50px auto;
@@ -34,10 +35,11 @@ form input {
 }
 
 form textarea {
+    font-family: Roboto;
     width: 95%;
     border: none;
     padding: 4px 10px;
     outline: none;
-    font-size: 1rem;
+    font-size: 0.8rem;
     resize: none;
 }
