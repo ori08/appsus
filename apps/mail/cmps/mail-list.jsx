@@ -16,7 +16,9 @@ export class MailList extends React.Component {
 
 
     render() {
+
         const { mail } = this.state
+        const { onRemoveMail } = this.props
 
         var iconsImg = {
             selected: 'assets/pics/asset 21.png',
@@ -44,7 +46,9 @@ export class MailList extends React.Component {
                         <p className="massage">{mail.massage}</p>
                         <p className="date">{mail.date}</p>
                     </Link>
+                    <img className="mail-icon" onClick={() => onRemoveMail(mail.id)} src="assets/pics/asset 30.png" />
                 </div>
+
             </div>
         </article>
     }

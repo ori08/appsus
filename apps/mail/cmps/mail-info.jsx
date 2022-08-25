@@ -16,7 +16,6 @@ export class MailInfo extends React.Component {
         const { mailId } = this.props.match.params
         mailService.getById(mailId)
             .then(mail => {
-                console.log(mail);
                 // if (!mail) return this.onGoBack()
                 this.setState(mail = { mail })
             })
@@ -24,10 +23,8 @@ export class MailInfo extends React.Component {
 
 
     render() {
-        console.log(this.state);
         const { mail } = this.state
         if (!mail) return
-        console.log(mail.username)
         // if (!mail) return ''
         return <section >
             <div className="flex">

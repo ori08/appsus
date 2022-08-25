@@ -1,5 +1,4 @@
 import { utilService } from '../../../js/services/util.service.js'
-import { storageService } from '../../../js/services/storage.service'
 
 export const mailService = {
     getById,
@@ -9,7 +8,8 @@ export const mailService = {
     _loadFromStorage,
     addNewMail,
     filterBy,
-    markAsSelected
+    markAsSelected,
+    removeMail
 }
 
 const KEY = 'mailsDB'
@@ -71,24 +71,15 @@ var gVendors = ['education', 'roman', 'music', 'philosophy', 'crime']
 function query(filterBy) {
 
     let mails = _loadFromStorage()
+    let mailsToDisplay = []
     if (!mails) {
         mails = _createMails()
         _saveToStorage(mails)
     }
-
-    // if (filterBy) {
-
-    //     let { type, minPrice, maxPrice } = filterBy
-    //     if (!minPrice) minPrice = 0;
-    //     if (!maxPrice) maxPrice = Infinity
-    //     books = books.filter(book => (
-    //         book.type.includes(type) &&
-    //         book.price >= minPrice &&
-    //         book.price <= maxPrice
-    //     ))
-    // }
-
-    return Promise.resolve(mails)
+    mails.map(mail => {
+        if (!mail.isRemoved) mailsToDisplay.push(mail)
+    })
+    return Promise.resolve(mailsToDisplay)
 }
 
 function getById(mailId) {
@@ -106,18 +97,29 @@ function filterBy(filterBy) {
     switch (filterBy) {
         case 'sent': {
             mails.map(mail => {
-                if (mail.from === myMail) filterMails.push(mail)
+                if (mail.from === myMail && !mail.isRemoved) filterMails.push(mail)
             })
             return Promise.resolve(filterMails)
         }
             break
         case 'all': {
-            return Promise.resolve(mails)
+            mails.map(mail => {
+                if (!mail.isRemoved) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+
         }
             break
         case 'starred': {
             mails.map(mail => {
-                if (mail.isStarrad) filterMails.push(mail)
+                if (mail.isStarrad && !mail.isRemoved) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+        }
+            break
+        case 'trash': {
+            mails.map(mail => {
+                if (mail.isRemoved) filterMails.push(mail)
             })
             return Promise.resolve(filterMails)
         }
@@ -191,7 +193,7 @@ function addNewMail(ev) {
     const mail = _createMail(username, subject, massage)
     mails.unshift(mail)
     _saveToStorage(mails)
-    // return Promise.resolve(mails)
+    return Promise.resolve()
 }
 
 function markAsSelected(mailId, type) {
@@ -235,6 +237,24 @@ function markAsSelected(mailId, type) {
     return Promise.resolve(markedMail)
 }
 
+function removeMail(mailId) {
+    let mails = _loadFromStorage()
+    var isRemoved
+    mails.map(mail => {
+        if (mail.id === mailId && !mail.isRemoved) isRemoved = false
+        else if (mail.id === mailId && mail.isRemoved) isRemoved = true
+    })
+    if (!isRemoved) {
+        mails.map(mail => { if (mail.id === mailId) return mail.isRemoved = true })
+        _saveToStorage(mails)
+        return Promise.resolve(mails)
+    }
+    else {
+        mails = mails.filter(mail => mail.id !== mailId)
+        _saveToStorage(mails)
+        return Promise.resolve()
+    }
+}
 
 function _saveToStorage(mails) {
     saveToStorage(KEY, mails)

@@ -14,7 +14,7 @@ export class MailSideBar extends React.Component {
                 imgSrc: 'assets/pics/asset 13.png',
                 btnName: "Inbox",
                 filterBy: "all",
-                color: defaltColor
+                color: selectedBtnColor
             },
             {
                 imgSrc: 'assets/pics/asset 27.png',
@@ -36,6 +36,8 @@ export class MailSideBar extends React.Component {
             }]
     }
 
+
+
     markSelected = (filterType, iconName) => {
         const { onFilterBy } = this.props
         var { sidebarIcons } = this.state
@@ -50,8 +52,7 @@ export class MailSideBar extends React.Component {
     render() {
         const { onFilterBy } = this.props
         const { sidebarIcons } = this.state
-        console.log(sidebarIcons);
-
+        const { listen } = this.props
         var styleTag = ''
 
         return <section >
@@ -60,13 +61,13 @@ export class MailSideBar extends React.Component {
                 <div className="flex compose">
                     <div className="compose-btn">
                         <img className="mail-icon" src="assets/pics/asset 12.png" />
-                        <Link to="/mail/edit"><button>Compose</button></Link>
+                        <button onClick={listen}>Compose</button>
                     </div>
                 </div>
 
                 <div className="side-bar-padding">
                     {sidebarIcons.map(icon => {
-                        return <div className="flex sidebar-icons" style={{ backgroundColor: icon.color }}>
+                        return <div className="flex sidebar-icons" style={{ backgroundColor: icon.color }} key={icon.btnName}>
                             <img className="mail-icon" src={icon.imgSrc} />
                             <button onClick={() => this.markSelected(icon.filterBy, icon.btnName)}>{icon.btnName}</button>
                         </div>
