@@ -42,14 +42,17 @@ function _createNote(title, txt, backgroundColor = 'transparent') {
     }
 }
 
-function colorPicker(noteId){
-let notes=_loadFromStorage()
-notes.map(note=>{
-if(note.id===noteId){
-    note.style.backgroundColor="red"
-}
-})
-_saveToStorage(notes)
+function colorPicker(noteId, color) {
+    let notes = _loadFromStorage()
+    var selectedNote = null
+    notes.map(note => {
+        if (note.id === noteId) {
+            selectedNote = note
+            return note.style.backgroundColor = color
+        }
+    })
+    _saveToStorage(notes)
+    return Promise.resolve(selectedNote)
 }
 
 
@@ -107,7 +110,7 @@ function addNote(ev) {
     console.log('notes', notes)
 
     saveToStorage(KEY, notes)
-
+    return Promise.resolve()
 
     // const value = ev.target.value
     // const mail = _createMail(username, subject, massage)
@@ -120,6 +123,7 @@ function removeNote(noteId) {
     let notes = _loadFromStorage()
     notes = notes.filter(note => note.id !== noteId)
     _saveToStorage(notes)
+
     return Promise.resolve()
 }
 
@@ -165,9 +169,9 @@ const expNotes = [
                     doneAt: 187111111
                 }
             ],
-            style: {
-                backgroundColor: "#00d"
-            }
+        },
+        style: {
+            backgroundColor: "#00d"
         }
     }
 ]

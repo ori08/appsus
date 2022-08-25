@@ -34,6 +34,7 @@ export class NoteIndex extends React.Component {
         noteService.removeNote(noteId).then(() => {
             console.log(this.state.notes)
             console.log('deleted!')
+            this.loadNotes()
         })
     }
 
@@ -42,13 +43,19 @@ export class NoteIndex extends React.Component {
     //     this.setState({ filterBy }, this.loadNotes)
     // }
 
-
+    onAddNote = (ev) => {
+        console.log(ev);
+        ev.preventDefault()
+        noteService.addNote(ev).then(note =>
+            this.loadNotes()
+        )
+    }
 
     render() {
         const { notes, selectedNote } = this.state
         return (
             <section className="main-index">
-                <CreateNote />
+                <CreateNote onAddNote={this.onAddNote} />
                 <NoteList notes={notes} onRemoveNote={this.onRemoveNote} />
             </section>
         )

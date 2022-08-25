@@ -11,3 +11,5 @@ export function NoteList({ notes, onRemoveNote }) {
         </section>
     </Link>
 }
+
+
