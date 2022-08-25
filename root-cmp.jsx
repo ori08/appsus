@@ -2,7 +2,6 @@ import { AppHeader } from "./js/cmps/app-header.jsx"
 import { About } from "./js/views/about.jsx"
 import { Home } from "./js/views/home.jsx"
 import { MailIndex } from "./apps/mail/views/mail-index.jsx"
-import { MailEditor } from "./apps/mail/views/mail-editor.jsx"
 import { NoteIndex } from "./apps/note/views/note-index.jsx"
 import { MailInfo } from "./apps/mail/cmps/mail-info.jsx"
 import { CreateNote } from "./apps/note/cmps/note-create.jsx"
@@ -16,7 +15,6 @@ export function App() {
         <section className="app">
             <AppHeader />
             <Switch>
-                <Route exact path="/mail/edit" component={MailEditor} />
                 <Route path="/mail/info/:mailId?" component={MailInfo} />
                 <Route path="/mail" component={MailIndex} />
                 <Route path="/notes" component={NoteIndex} />

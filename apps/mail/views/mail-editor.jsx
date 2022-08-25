@@ -1,37 +1,48 @@
-import { mailService } from "../services/mail.service.js"
-import { utilService } from '../../../js/services/util.service.js'
-import { MailIndex } from "./mail-index.jsx"
+
 import { onAddMail } from "./mail-index.jsx"
 
 export class MailEditor extends React.Component {
-
-    state = {
-        mail: {
-            id: utilService.makeId(),
-            username: null,
-            massage: null,
-            pics: [],
-            isRead: false,
-            date: null
-        }
-    }
 
 
 
 
     render() {
-        return <section >
-            <form className="flex column " onSubmit={() => onAddMail(event)}>
+        const { onAddMail } = this.props
+        const { isNewMail } = this.props
+        console.log(isNewMail);
+        var display = "none"
+        if (isNewMail) display = "flex"
+
+        return <section className="editor" style={{ display: display }} >
+
+            <div className="editor-header" >
+                <h3 className="editor-header-messege">New Massege</h3>
+                <img onClick={() => onAddMail('close')} className="mail-icon exitBtn" src='assets/pics/asset 40.png' />
+            </div>
+            <form className="form-editor" onSubmit={() => onAddMail(event)}>
                 <div className="flex">
-                    <h1>To</h1>
-                    <input type="mail" />
+                    <h1 className="input-text">To</h1>
+                    <input className="editor-input" type="mail" />
                 </div>
                 <div className="flex">
-                    <h1>Subject</h1>
-                    <input type="text" />
+                    <h1 className="input-text">Subject</h1>
+                    <input className="editor-input" type="text" />
                 </div>
                 <textarea name="" id="" cols="100" rows="20"></textarea>
-                <button className="send-btn">send</button>
+
+                <div className="toolbar-editor">
+                    <div className="send-btn-design">
+                        <button className="send-btn">send</button>
+                    </div>
+                    <img className="mail-icon " src='assets/pics/asset 50.png' />
+                    <img className="mail-icon " src='assets/pics/asset 55.png' />
+                    <img className="mail-icon " src='assets/pics/asset 57.png' />
+                    <img className="mail-icon " src='assets/pics/asset 58.png' />
+                    <img className="mail-icon " src='assets/pics/asset 59.png' />
+                    <img className="mail-icon " src='assets/pics/asset 60.png' />
+                    <img className="mail-icon " src='assets/pics/asset 61.png' />
+                    <img className="mail-icon " src='assets/pics/asset 16.png' />
+                </div>
             </form>
         </section >
     }

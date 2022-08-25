@@ -1,5 +1,6 @@
 .mailLink {
     display: flex;
+    align-items: center;
     background-color: white;
     width: 100%;
     height: 40px;
@@ -55,6 +56,20 @@ textarea {
 
 .send-btn {
     width: 100px;
+    text-align: left;
+    color: white;
+    margin-left: 35px;
+    font-size: 16px;
+}
+
+.send-btn-design {
+    background-color: rgb(12, 87, 208);
+    height: 38px;
+    width: 120px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 form {
@@ -71,4 +86,67 @@ form {
 
 .padding-mail-info {
     margin-left: 73px;
+}
+
+.mail {
+    display: flex;
+    align-items: center;
+}
+
+/* mail editor */
+
+.editor {
+    flex-basis: 76.25%;
+    flex-direction: column;
+    background-color: rgb(246, 248, 252)
+}
+
+.editor-header {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    background-color: rgb(242, 246, 252);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 7px rgb(128 128 128);
+}
+
+.editor-header-messege {
+    font-size: 14px;
+    margin-left: 14px;
+    font-weight: 400;
+}
+
+.form-editor {
+    position: relative;
+    max-width: 100%;
+    margin: 0px 0 0px 0;
+    padding: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    background-color: rgb(255, 255, 255)
+}
+
+
+.editor-input {
+
+    border-bottom: 2px solid rgb(234, 240, 248);
+    border-radius: 0px;
+    margin-bottom: 10px;
+}
+
+.input-text {
+    font-weight: 500;
+    color: rgb(119, 119, 119);
+}
+
+.toolbar-editor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
