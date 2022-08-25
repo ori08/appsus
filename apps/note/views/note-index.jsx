@@ -30,13 +30,14 @@ export class NoteIndex extends React.Component {
             })
     }
 
-    onRemoveBook = (bookId) => {
-        bookService.remove(bookId)
-            .then(() => {
-                console.log({notes})
-            })
+    onRemoveNote = (noteId) => {
+        noteService.removeNote(noteId).then(() => {
+            console.log(this.state.notes)
+            console.log('deleted!')
+        })
     }
-    
+
+    // onChangeColor = (noteId) => {
     // onSetFilter = (filterBy) => {
     //     this.setState({ filterBy }, this.loadNotes)
     // }
@@ -48,7 +49,7 @@ export class NoteIndex extends React.Component {
         return (
             <section className="main-index">
                 <CreateNote />
-                <NoteList notes={notes} onSelectedBook={this.onSelectedBook} />
+                <NoteList notes={notes} onRemoveNote={this.onRemoveNote} />
             </section>
         )
     }

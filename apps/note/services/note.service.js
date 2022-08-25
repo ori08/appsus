@@ -5,7 +5,8 @@ let notes = []
 export const noteService = {
     query,
     getById,
-    addNote
+    addNote,
+    removeNote
 }
 
 export function query(filterBy) {
