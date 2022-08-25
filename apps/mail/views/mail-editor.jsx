@@ -20,7 +20,7 @@ export class MailEditor extends React.Component {
 
 
     render() {
-        return <section className="book-edit">
+        return <section >
             <form className="flex column " onSubmit={() => onAddMail(event)}>
                 <div className="flex">
                     <h1>To</h1>

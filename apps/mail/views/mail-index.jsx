@@ -33,6 +33,13 @@ export class MailIndex extends React.Component {
         this.setState({ isNewMail: true })
     }
 
+    onFilterBy = (filterBy) => {
+        console.log(filterBy)
+        mailService.filterBy(filterBy).then(mails => {
+            this.setState(mails = { mails })
+        })
+    }
+
     onGoBack = () => {
         this.props.history.push('/mail')
     }
@@ -43,7 +50,7 @@ export class MailIndex extends React.Component {
         return <section className="mail-app">
             <div className="flex">
                 <div className="mail-side-bar">
-                    <MailSideBar mails={mails} />
+                    <MailSideBar mails={mails} onFilterBy={this.onFilterBy} />
                 </div>
                 <div className="mail-list-container">
                     <MailContainer mails={mails} />
@@ -62,7 +69,6 @@ function onAddMail(ev) {
     mailService.addNewMail(ev).then(
         location.reload()
     )
-
 }
 
-export { onAddMail }
+export { onAddMail }   

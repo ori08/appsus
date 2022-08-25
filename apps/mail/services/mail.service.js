@@ -7,37 +7,52 @@ export const mailService = {
     getVendors,
     save,
     _loadFromStorage,
-    addNewMail
+    addNewMail,
+    filterBy,
+    markAsSelected
 }
 
 const KEY = 'mailsDB'
+const myMail = "orielgrabli@gmail.com"
 
 const defaultMails = {
     admin: {
         id: utilService.makeId(),
+        from: 'Admin@gmail.com',
         username: 'Admin',
         subject: 'Welcome',
         massage: 'Im so glad you decide to try out MailBaba \n here few tips to get you up and running fast',
         pics: [],
         isRead: false,
+        isStarrad: false,
+        isRemoved: false,
+        isSelected: false,
         date: getCurrDate()
     },
     supportTeam: {
         id: utilService.makeId(),
+        from: 'Support@gmail.com',
         username: 'Support Team:',
         subject: 'support',
         massage: 'Hi, Dani from MailBaba support team \n Thanks for chosen MailBaba \n Im here for any technical problem. \n U are welcome',
         pics: [],
         isRead: false,
+        isStarrad: false,
+        isRemoved: false,
+        isSelected: false,
         date: getCurrDate()
     },
     Spam: {
         id: utilService.makeId(),
+        from: 'market@gmail.com',
         username: 'Spam',
         subject: 'Package from California',
         massage: ' Your package is pending: \n, we came across a package from a recent month pending for you',
         pics: [],
         isRead: false,
+        isStarrad: false,
+        isRemoved: false,
+        isSelected: false,
         date: getCurrDate()
     }
 }
@@ -80,6 +95,33 @@ function getById(mailId) {
     return Promise.resolve(mail)
 }
 
+
+function filterBy(filterBy) {
+    let mails = _loadFromStorage()
+    var filterMails = []
+
+    switch (filterBy) {
+        case 'sent': {
+            mails.map(mail => {
+                if (mail.from === myMail) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+        }
+            break
+        case 'all': {
+            return Promise.resolve(mails)
+        }
+            break
+        case 'starred': {
+            mails.map(mail => {
+                if (mail.isStarrad) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+        }
+            break
+    }
+}
+
 function remove(mailId) {
     let mails = _loadFromStorage()
     mails = mails.filter(mail => mail.id !== mailId)
@@ -91,8 +133,6 @@ function save(mail) {
     if (mail.id) return _update(mail)
     else return _add(mail)
 }
-
-
 
 function _update(mailToUpdate) {
     let mails = _loadFromStorage()
@@ -108,11 +148,15 @@ function getVendors() {
 function _createMail(username, subject, massage) {
     var mail = {
         id: utilService.makeId(),
+        from: myMail,
         username,
         massage,
         subject,
         pics: [],
         isRead: false,
+        isStarrad: false,
+        isRemoved: false,
+        isSelected: false,
         date: null
     }
 
@@ -137,7 +181,6 @@ function _createMails() {
 function addNewMail(ev) {
     ev.preventDefault()
     let mails = _loadFromStorage()
-    console.log(mails);
     const username = ev.target[0].value
     const subject = ev.target[1].value
     const massage = ev.target[2].value
@@ -147,8 +190,20 @@ function addNewMail(ev) {
     // return Promise.resolve(mails)
 }
 
-
-
+function markAsSelected(mailId) {
+    let mails = _loadFromStorage()
+    let markedMail = null
+    mails.map(mail => {
+        if (mail.id === mailId) {
+            console.log(mail.isStarrad);
+            if (mail.isStarrad) mail.isStarrad = false
+            else mail.isStarrad = true
+            markedMail = mail
+        }
+    })
+    _saveToStorage(mails)
+    return Promise.resolve(markedMail)
+}
 
 
 function _saveToStorage(mails) {

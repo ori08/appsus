@@ -25,7 +25,7 @@ export class NoteIndex extends React.Component {
     //     this.setState({ filterBy }, this.loadNotes)
     // }
 
-    
+
 
     render() {
         const { notes, selectedNote } = this.state

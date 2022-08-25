@@ -30,7 +30,8 @@
 }
 
 .username {
-    flex-basis: 10%;
+    /* flex-basis: 10%; */
+    width: 10vw;
 }
 
 .massage {
