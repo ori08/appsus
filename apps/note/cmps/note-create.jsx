@@ -15,12 +15,12 @@ export function CreateNote({ note, onAddNote }) {
                 document.querySelector('.note-form').reset()
                 console.log(event.target['url'].value)
             }}>
-                <input className="note-txt-input" required type="text" name="title"
+                <input className="note-txt-input" type="text" name="title"
                     placeholder="Title" />
                     
                 <textarea name="txt" placeholder="Take a note..."></textarea>
                 <input type="text" placeholder="Add img URL..." name="url" />
-                <input type="text" placeholder="Add Youtube URL..." name="url" />
+                <input type="text" placeholder="Add Youtube URL..." name="yt" />
                 <div className="flex space-between">
                     <button>Add</button>
                     <div>
