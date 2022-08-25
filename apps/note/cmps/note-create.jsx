@@ -9,15 +9,14 @@ function handleChange(ev) {
     console.log(ev.target.name)
 }
 
-export function CreateNote({ note, onAddNote }) {
-
+export function CreateNote({ note, addNewCar }) {
     return (
         <div>
             <form className="note-form" onSubmit={() => onAddNote(event)}>
                 <input className="note-txt-input" required type="text" name="title"
                     placeholder="Title" />
                 <textarea name="txt" placeholder="Take a note..."></textarea>
-                <button>Add</button>
+                {/* <button onClick={noteService.addNote}>Add</button> */}
             </form>
         </div>
     )
