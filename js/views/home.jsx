@@ -1,13 +1,9 @@
 
 export function Home() {
 
-    return <section className="home">
-        <h1>Welcome to home page!</h1>
-        <i className="fa-solid fa-inbox"></i> inbox
-        <i className="fa-regular fa-star"></i> star
-        <i className="fa-regular fa-clock"></i> clock
-        <i className="fa-regular fa-paper-plane"></i> sent
-        <i className="fa-regular fa-trash-can"></i> trash
+    return <section className="home flex justify-center">
+        <h1 className="logo logo-home animate__animated animate__backInDown">AppsUs</h1>
+        <p className="home-title animate__animated animate__backInUp">Your one place for everything.</p>
     </section>
 }
 //GMAIL

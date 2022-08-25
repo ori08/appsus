@@ -3,8 +3,10 @@ export function AppHeader() {
 
     return <header className="app-header">
         <Link to="/">
-            <img className="burger-icon" src="assets/pics/asset 73.svg" />
-            <img className="logo" src="assets/pics/asset 1.png" />
+            <div className="flex">
+                <img className="burger-icon" src="assets/pics/asset 73.svg" />
+                <h1 className="logo">AppsUs</h1>
+            </div>
         </Link>
         <nav>
             <NavLink exact to="/">Home</NavLink>

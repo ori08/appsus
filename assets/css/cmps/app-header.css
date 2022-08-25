@@ -19,16 +19,15 @@ nav a:active {
 }
 
 nav a.active {
-    color: darkblue;
+    color: rgb(240, 183, 183);
     font-weight: bold;
     text-decoration: overline;
 }
 
 
 .logo {
-    height: 30px;
-    width: 100px;
-
+    font-family: Comfortaa;
+    font-size: 1.8rem;
 }
 
 .burger-icon {
