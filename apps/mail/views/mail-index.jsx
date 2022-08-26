@@ -79,21 +79,18 @@ export class MailIndex extends React.Component {
         else mailDisplay = "flex"
 
 
+        // <div className="mail-list-container" style={{ display: mailDisplay }}>
 
         return <section className="mail-app">
             <div className="flex">
-                <div className="mail-side-bar">
-                    <MailSideBar mails={mails} onFilterBy={this.onFilterBy} listen={this.listen} />
-                </div>
-                <div className="mail-list-container" style={{ display: mailDisplay }}>
-                    <MailContainer mails={mails} onRemoveMail={this.onRemoveMail} />
-                </div>
+
+                <MailSideBar mails={mails} onFilterBy={this.onFilterBy} listen={this.listen} />
+
+                <MailContainer mails={mails} onRemoveMail={this.onRemoveMail} />
 
                 <MailEditor onAddMail={this.onAddMail} isNewMail={isNewMail} />
 
-                <div className="additional-app">
-                    <AdditionalApp />
-                </div>
+                <AdditionalApp />
 
             </div>
         </section>

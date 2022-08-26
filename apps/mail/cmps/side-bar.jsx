@@ -14,25 +14,29 @@ export class MailSideBar extends React.Component {
                 imgSrc: 'assets/pics/asset 13.png',
                 btnName: "Inbox",
                 filterBy: "all",
-                color: selectedBtnColor
+                color: selectedBtnColor,
+                bold: '600'
             },
             {
                 imgSrc: 'assets/pics/asset 27.png',
                 btnName: "Starred",
                 filterBy: "starred",
-                color: defaltColor
+                color: defaltColor,
+                bold: '400'
             },
             {
                 imgSrc: 'assets/pics/asset 63.png',
                 btnName: "Sent",
                 filterBy: "sent",
-                color: defaltColor
+                color: defaltColor,
+                bold: '400'
             },
             {
                 imgSrc: 'assets/pics/asset 30.png',
                 btnName: "Trash",
                 filterBy: "trash",
-                color: defaltColor
+                color: defaltColor,
+                bold: '400'
             }]
     }
 
@@ -42,8 +46,14 @@ export class MailSideBar extends React.Component {
         const { onFilterBy } = this.props
         var { sidebarIcons } = this.state
         sidebarIcons.map(icon => {
-            if (icon.btnName === iconName) return icon.color = selectedBtnColor
-            else icon.color = defaltColor
+            if (icon.btnName === iconName) {
+                icon.color = selectedBtnColor
+                icon.bold = '600'
+            }
+            else {
+                icon.color = defaltColor
+                icon.bold = '400'
+            }
         })
         onFilterBy(filterType)
     }
@@ -55,13 +65,13 @@ export class MailSideBar extends React.Component {
         const { listen } = this.props
         var styleTag = ''
 
-        return <section >
+        return <section className="mail-side-bar">
             <div className="side-bar-contect">
 
                 <div className="flex compose">
                     <div className="compose-btn">
                         <img className="mail-icon" src="assets/pics/asset 12.png" />
-                        <button onClick={listen}>Compose</button>
+                        <button className="Compose-Btn-text" onClick={listen}>Compose</button>
                     </div>
                 </div>
 
@@ -69,7 +79,7 @@ export class MailSideBar extends React.Component {
                     {sidebarIcons.map(icon => {
                         return <div className="flex sidebar-icons" style={{ backgroundColor: icon.color }} key={icon.btnName}>
                             <img className="mail-icon" src={icon.imgSrc} />
-                            <button onClick={() => this.markSelected(icon.filterBy, icon.btnName)}>{icon.btnName}</button>
+                            <button className="side-bar-btn" style={{ fontWeight: icon.bold }} onClick={() => this.markSelected(icon.filterBy, icon.btnName)}>{icon.btnName}</button>
                         </div>
                     })}
 

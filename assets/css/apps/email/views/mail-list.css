@@ -1,23 +1,25 @@
 .mail-side-bar {
     background-color: rgb(246, 248, 252);
     height: calc(100vh - 70px);
-    flex-basis: 18.82%;
+    width: 100%;
+    flex-basis: 20.5%;
 }
 
 .mail-list-container {
     background-color: rgb(255, 255, 255);
-    height: 100vh;
-    flex-basis: 76.25%;
+
+    width: 73.46%;
+    display: flex;
+    flex-direction: column;
+    /* flex-basis: 73.46%; */
 }
+
 
 .mail-info-container {
     background-color: rgb(255, 255, 255);
     height: 100vh;
-    flex-basis: 76.25%;
-
+    flex-basis: 70.25%;
     margin-top: 8px;
-
-
 }
 
 .side-bar-contect {
@@ -26,20 +28,22 @@
 }
 
 .additional-app {
+    width: 100%;
     background-color: rgb(246, 248, 252);
-    flex-basis: 4.93%;
+    flex-basis: 5.5%;
 }
 
 
 
 .mail-icon {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 22px;
     cursor: pointer;
+    object-fit: contain;
 }
 
 .side-bar-padding {
-    padding-top: 24px;
+    padding-top: 18px;
 
 }
 
@@ -47,7 +51,7 @@
     padding-left: 28px;
     /* padding-bottom: 16px; */
     height: 36px;
-    width: 80%;
+    width: 94%;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     display: flex;
@@ -56,10 +60,10 @@
 }
 
 .compose {
+    margin-top: 10px;
     margin-left: 8px;
-    margin-top: 8px;
-    height: 55px;
-    width: 120px;
+    height: 60px;
+    width: 152px;
     background-color: rgb(194, 230, 254);
     display: flex;
     align-items: center;
@@ -73,23 +77,53 @@
 }
 
 .compose-btn {
-
     display: flex;
     align-content: center;
 }
 
-.mail-link-icons {
+.Compose-Btn-text {
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
 
-    flex-basis: 8%;
+
+.mail-link-icons {
     display: flex;
     align-items: center;
-    margin-left: 24px;
-    margin-right: 8px;
-    gap: 3px;
+}
+
+.first {
+    margin: 0 10px 0 13px;
+}
+
+.last {
+    margin: 0 10px 0 13px;
 }
 
 .mail-link-cotext {
-    width: 70vw;
     display: flex;
     align-items: center;
+}
+
+
+.email-container {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border: 2px solid rgb(246, 248, 252);
+    border-top: none;
+    /* justify-content: space-between; */
+}
+
+
+.email-container:first-child {
+    border-radius: 50%;
+}
+
+.side-bar-btn {
+    margin-left: 6px;
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
