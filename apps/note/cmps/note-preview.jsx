@@ -59,6 +59,8 @@ export class NotePreview extends React.Component {
                     <button className="btn-color" onClick={() => this.onColorPicker('#ffa07a')} style={{ backgroundColor: "#ffa07a" }} value="#ffa07a"> </button>
                 </div>
             </div>
+
+            
         </article>
     }
 }

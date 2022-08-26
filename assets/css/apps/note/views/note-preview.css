@@ -45,11 +45,14 @@ img.note-icon {
     cursor: pointer;
     width: 25px;
     margin-right: 7px;
+    color: #202124;
+    opacity: 55%;
 }
 img.note-icon:hover {
     transition: 0.2s;
     border-radius: 50%;
     background-color: lightgrey;
+   
 }
 
 .note-txt {
