@@ -5,6 +5,7 @@ import { noteService } from "../services/note.service.js"
 //     console.log(ev.target.name)
 // }
 
+
 function toggleInputs() {
     const txt = document.querySelector('.txtarea')
     txt.style.display = 'block'
@@ -27,14 +28,12 @@ function toggleYt() {
     yt.style.display = 'block'
 }
 export function CreateNote({ note, onAddNote }) {
-
     return (
         <div>
 
             <form className="note-form" onSubmit={() => {
                 onAddNote(event)
                 document.querySelector('.note-form').reset()
-                console.log(event.target['url'].value)
             }}>
                 <input className="note-txt-input" type="text" name="title"
                     placeholder="Title" onClick={toggleInputs} />

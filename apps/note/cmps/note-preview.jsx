@@ -1,12 +1,34 @@
+import { eventBusService } from "../../../js/services/event-bus.service.js"
 import { noteService } from "../services/note.service.js"
-// style={{ backgroundColor: note.style.backgroundColor }}
+import { NoteEditor } from "./note-editor.jsx"
 
 
 export class NotePreview extends React.Component {
 
     state = {
-        note: this.props.note
+        note: this.props.note,
+        note2Edit: 'not null',
+        selectedNote: this.props.selectedNote
     }
+    updateSelectedNote = () => {
+        this.setState(this.props.selectedNote = note)
+    }
+
+
+componentDidMount(){
+let x= null
+    eventBusService.on('s', note=>{
+        console.log(note);
+        if(!note)return
+      if(this.state.note.id===note.id)this.setState({note})
+       
+    })
+// console.log('last print ');
+// if(x)console.log(x);
+
+
+}
+
 
     onColorPicker = (color) => {
         const { note } = this.state
@@ -16,6 +38,8 @@ export class NotePreview extends React.Component {
             )
         })
     }
+
+
 
     onRemove = (note) => {
         const { onRemoveNote } = this.props
@@ -27,24 +51,47 @@ export class NotePreview extends React.Component {
         var el = document.querySelector(`.${note.id}`)
         if (el.style.display === "none") el.style.display = 'flex'
         else el.style.display = "none"
+    }
 
+    printThisNote = () => {
+        const { note } = this.state
+        noteService.getById(note.id)
+            .then(note => {
+                this.setState({ note2Edit: note })
+            })
+        // console.log('NOTE 2 EDIT:', this.state.note2Edit)
+    }
+
+    toggleDarken = (noteValue) => {
+        const dark = document.querySelector('.darken')
+        const editor = document.querySelector('.note-editor')
+        editor.style.display = 'flex'
+        if (dark.style.backgroundColor === 'rgba(0, 0, 0, 0.5)')
+            dark.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+        else
+            dark.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
     }
 
     render() {
-
         var isColorBtnClick = false
         var display = 'flex'
         const color = "red"
 
         const { note } = this.state
-        return <article className="note-preview" style={{ backgroundColor: note.style.backgroundColor }}>
-            {note.info.url && <img className='note-url' src={note.info.url} alt="" />}
-            {note.info.yt && <iframe src={note.info.yt}
-                frameborder="0" allow="autoplay; encrypted-media"
-                allowfullscreen title="video" />
+        return <article className="note-preview" style={{ backgroundColor: note.style.backgroundColor }
+        } onClick={() => {
+            const note = this.state.note
+            eventBusService.emit('currNote', note)
+        }
+        } >
+            {note.info.url && <img className='note-url' src={note.info.url} alt="" onClick={this.toggleDarken} />}
+            {
+                note.info.yt && <iframe src={note.info.yt}
+                    frameborder="0" allow="autoplay; encrypted-media"
+                    allowfullscreen title="video" />
             }
-            <h1 className='note-title'>{note.info.title}</h1>
-            <p className='note-txt'>{note.info.txt}</p>
+            < h1 className='note-title' onClick={() => this.toggleDarken('edit')} > {note.info.title}</h1 >
+            <p className='note-txt' onClick={this.toggleDarken}>{note.info.txt}</p>
             <div className='note-controls flex' >
                 <img className="note-icon" onClick={() => this.showColorModal()} src="assets/img/icons/color-palette.svg" alt="" />
                 <img className="note-icon" src="assets/img/icons/trash-can.svg" alt="" onClick={() => this.onRemove(note)} />
@@ -60,7 +107,19 @@ export class NotePreview extends React.Component {
                 </div>
             </div>
 
-            
-        </article>
+        </article >
     }
 }
+
+// function toggleDarken(noteValue) {
+//     var value = noteValue
+//     var isEdit=true
+//     this.setState({ isEdit: isEdit} )
+//     const dark = document.querySelector('.darken')
+//     const editor = document.querySelector('.note-editor')
+//     editor.style.display = 'flex'
+//     if (dark.style.backgroundColor === 'rgba(0, 0, 0, 0.5)')
+//         dark.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+//     else
+//         dark.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+// }
