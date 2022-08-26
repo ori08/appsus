@@ -24,7 +24,7 @@ export function query(filterBy) {
     return Promise.resolve(notes)
 }
 
-function _createNote(title, txt, url = '', backgroundColor = 'transparent', yt = '') {
+function _createNote(title, txt, url = null, yt = null, backgroundColor = 'transparent') {
 
     return {
         id: utilService.makeId(),
@@ -34,6 +34,7 @@ function _createNote(title, txt, url = '', backgroundColor = 'transparent', yt =
             title,
             txt,
             url,
+            yt,
         },
         style: {
             backgroundColor
@@ -42,6 +43,20 @@ function _createNote(title, txt, url = '', backgroundColor = 'transparent', yt =
     }
 }
 
+// return {
+//     id: utilService.makeId(),
+//     type: 'text',
+//     isPinned: false,
+//     info: {
+//         title,
+//         txt,
+//         url,
+//     },
+//     style: {
+//         backgroundColor
+//     },
+//     todos: []
+// }
 function colorPicker(noteId, color) {
     let notes = _loadFromStorage()
     var selectedNote = null
@@ -93,28 +108,45 @@ function addNote(ev) {
     ev.preventDefault()
 
     const note = []
+    const noteTest = []
     let name
     let value
 
-    for (var i = 0; i < ev.target.length; i++) {
-        {
-            if (ev.target[i].value.includes('youtube')) {
-                const embed = ev.target[i].value.split('=')
-                note.push(embed[1])
-            }
-            if (ev.target[i].value) {
-                name = ev.target[i].name
-                value = ev.target[i].value
-            }
-            if (value) {
-                console.log('Name: ', name)
-                console.log('Value: ', value)
-                note.push(value)
-            }
-        }
+
+
+    console.log(ev)
+    // for (var i = 0; i < ev.target.length - 1; i++) {
+    //     console.log('Target:' + i, ev.target[i].value)
+    // }
+    // for (var i = 0; i < ev.target.length - 1; i++) {
+    //     {
+    //         if (ev.target[i].value.includes('youtube')) {
+    //             const embed = ev.target[i].value.split('=')
+    //             note.push(embed[1])
+    //         }
+    //         if (ev.target[i].value !== '') {
+    //             name = ev.target[i].name
+    //             value = ev.target[i].value
+    //             console.log('THIS IS THE TEST: ', { [name]: value })
+    //             note.push(value)
+    //             noteTest.push({ [name]: value })
+    //         }
+
+    //     }
+    // }
+
+    let title = ev.target[0].value ? ev.target[0].value : null
+    let txt = ev.target[1].value ? ev.target[1].value : null
+    let url = ev.target[2].value ? ev.target[2].value : null
+    let yt = ev.target[3].value ? ev.target[3].value : null
+    if (ev.target[3].value.includes('youtube')) {
+        const embed = ev.target[3].value.split('=')
+        yt = 'https://www.youtube.com/embed/'+embed[1]
     }
+
     console.log('NEW NOTE:', note)
-    notes.push(_createNote(note[0], note[1], note[2] ? note[2] : null))
+    console.log('NEW TEST NOTE:', noteTest)
+    notes.push(_createNote(title, txt, url, yt))
     console.log('notes', notes)
 
     saveToStorage(KEY, notes)

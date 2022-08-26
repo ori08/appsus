@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 html {
     height: 100%;
 }
@@ -46,4 +42,17 @@ button {
 
 article {
     cursor: auto;
+}
+
+h1:empty,
+p:empty {
+    display: none;
+}
+
+.darken {
+    transition: 0.5s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
 }

@@ -81,24 +81,14 @@
     align-content: center;
 }
 
-.Compose-Btn-text {
-    font-size: 15.5px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-
 .mail-link-icons {
+
+    flex-basis: 8%;
     display: flex;
     align-items: center;
-}
-
-.first {
-    margin: 0 10px 0 13px;
-}
-
-.last {
-    margin: 0 10px 0 13px;
+    margin-left: 24px;
+    margin-right: 8px;
+    gap: 3px;
 }
 
 .mail-link-cotext {

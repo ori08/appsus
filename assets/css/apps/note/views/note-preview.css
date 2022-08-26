@@ -1,4 +1,5 @@
 .note-preview {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,10 +23,16 @@
     box-shadow: 0px 0px 2px 1px #aaaaaa;
 }
 
+.note-preview:hover .note-controls{
+    transition: 0.5s;
+    opacity: 1;
+}
+
 .note-controls {
     display: flex;
     width: 100%;
     justify-content: right;
+    opacity: 0;
 }
 
 .note-controls img {
@@ -35,8 +42,17 @@
 }
 
 img.note-icon {
+    cursor: pointer;
     width: 25px;
     margin-right: 7px;
+    color: #202124;
+    opacity: 55%;
+}
+img.note-icon:hover {
+    transition: 0.2s;
+    border-radius: 50%;
+    background-color: lightgrey;
+   
 }
 
 .note-txt {
@@ -52,7 +68,14 @@ input.color-picker {
     z-index: 20;
 }
 
-img.note-url{
+img.note-url {
+    position: relative;
     border-radius: 8px;
+    min-height: 200px;
 }
 
+iframe {
+    position: relative;
+    border-radius: 8px;
+    width: 100%;
+}
