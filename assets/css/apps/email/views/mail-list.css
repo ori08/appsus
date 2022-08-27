@@ -49,15 +49,17 @@
 
 .sidebar-icons {
     padding-left: 28px;
-    /* padding-bottom: 16px; */
     height: 36px;
-    width: 94%;
+    width: 80%;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     display: flex;
     align-items: center;
     gap: 8px;
 }
+
+
+
 
 .compose {
     margin-top: 10px;
@@ -96,20 +98,34 @@
     align-items: center;
 }
 
+a.mail-link-cotext {
+    max-width: 100%;
+}
 
 .email-container {
-    padding-top: 10px;
+    height: 45px;
     padding-right: 10px;
-    padding-bottom: 10px;
+    align-items: center;
     border: 2px solid rgb(246, 248, 252);
     border-top: none;
     /* justify-content: space-between; */
+    cursor: pointer;
+
+}
+
+.email-container:hover {
+    box-shadow: 0 2px 7px rgb(128 128 128)
+}
+
+.email-container:hover>.mail-icon.delete {
+    opacity: 0.5;
+}
+
+.email-container:hover>.date {
+    opacity: 0;
 }
 
 
-.email-container:first-child {
-    border-radius: 50%;
-}
 
 .side-bar-btn {
     margin-left: 6px;

@@ -1,9 +1,11 @@
 import { MailEditor } from "../views/mail-editor"
+import { mailService } from "../services/mail.service.js"
 
 const { Link } = ReactRouterDOM
 
 const defaltColor = "rgb(246, 248, 252)"
 const selectedBtnColor = 'rgb(211, 227, 253)'
+const myMail = "orielgrabli@gmail.com"
 
 
 export class MailSideBar extends React.Component {
@@ -15,34 +17,99 @@ export class MailSideBar extends React.Component {
                 btnName: "Inbox",
                 filterBy: "all",
                 color: selectedBtnColor,
-                bold: '600'
-            },
-            {
-                imgSrc: 'assets/pics/asset 27.png',
-                btnName: "Starred",
-                filterBy: "starred",
-                color: defaltColor,
-                bold: '400'
+                bold: '600',
+                count: 0
             },
             {
                 imgSrc: 'assets/pics/asset 63.png',
                 btnName: "Sent",
                 filterBy: "sent",
                 color: defaltColor,
-                bold: '400'
+                bold: '400',
+                count: 0
+            },
+            {
+                imgSrc: 'assets/pics/asset 34.png',
+                btnName: "UnRead",
+                filterBy: "unread",
+                color: defaltColor,
+                bold: '400',
+                count: 0
+            },
+            {
+                imgSrc: 'assets/pics/asset 31.png',
+                btnName: "Read",
+                filterBy: "read",
+                color: defaltColor,
+                bold: '400',
+                count: 0
+            },
+            {
+                imgSrc: 'assets/pics/asset 27.png',
+                btnName: "Starred",
+                filterBy: "starred",
+                color: defaltColor,
+                bold: '400',
+                count: 0
             },
             {
                 imgSrc: 'assets/pics/asset 30.png',
                 btnName: "Trash",
                 filterBy: "trash",
                 color: defaltColor,
-                bold: '400'
-            }]
+                bold: '400',
+                count: 0
+            },
+            ]
     }
 
 
 
+
+    componentDidMount() {
+        // this.countByFilter()
+        if (mailService.loadFromStorage('filter')) {
+            const filterBy = mailService.loadFromStorage('filter')
+            let { sidebarIcons } = this.state
+            sidebarIcons.map(icon => {
+                if (icon.filterBy === filterBy) return icon.color = selectedBtnColor
+                else return icon.color = defaltColor
+            })
+            this.setState({ sidebarIcons: sidebarIcons })
+        }
+    }
+
+
+
+
+    // componentDidUpdate() {
+    //     this.countByFilter()
+    // }
+
+    countByFilter = () => {
+        if (!mailService._loadFromStorage()) return
+        let mails = mailService._loadFromStorage()
+        let { sidebarIcons } = this.state
+        sidebarIcons.map(icon => icon.count = 0)
+
+
+        mails.map(mail => {
+            if (mail.from !== myMail && !mail.isRemoved) sidebarIcons[0].count++
+            if (mail.from === myMail && !mail.isRemoved) sidebarIcons[1].count++
+            if (!mail.isRead && !mail.isRemoved) sidebarIcons[2].count++
+            if (mail.isRead && !mail.isRemoved) sidebarIcons[3].count++
+            if (mail.isStarrad && !mail.isRemoved) sidebarIcons[4].count++
+            if (mail.isRemoved) sidebarIcons[5].count++
+        })
+    }
+
     markSelected = (filterType, iconName) => {
+        if (this.props.linkfrom) {
+            var { linkfrom } = this.props
+            if (linkfrom === 'info') window.location.href = "index.html#/mail"
+            mailService.saveToStorage('filter', filterType)
+        }
+
         const { onFilterBy } = this.props
         var { sidebarIcons } = this.state
         sidebarIcons.map(icon => {
@@ -55,11 +122,15 @@ export class MailSideBar extends React.Component {
                 icon.bold = '400'
             }
         })
+        mailService.saveToStorage('filter', filterType)
         onFilterBy(filterType)
+
     }
 
 
     render() {
+
+        this.countByFilter()
         const { onFilterBy } = this.props
         const { sidebarIcons } = this.state
         const { listen } = this.props
@@ -68,7 +139,7 @@ export class MailSideBar extends React.Component {
         return <section className="mail-side-bar">
             <div className="side-bar-contect">
 
-                <div className="flex compose">
+                <div className="compose flex">
                     <div className="compose-btn">
                         <img className="mail-icon" src="assets/pics/asset 12.png" />
                         <button className="Compose-Btn-text" onClick={listen}>Compose</button>
@@ -80,6 +151,7 @@ export class MailSideBar extends React.Component {
                         return <div className="flex sidebar-icons" style={{ backgroundColor: icon.color }} key={icon.btnName}>
                             <img className="mail-icon" src={icon.imgSrc} />
                             <button className="side-bar-btn" style={{ fontWeight: icon.bold }} onClick={() => this.markSelected(icon.filterBy, icon.btnName)}>{icon.btnName}</button>
+                            <p>{icon.count}</p>
                         </div>
                     })}
 
@@ -88,3 +160,4 @@ export class MailSideBar extends React.Component {
         </section>
     }
 }
+

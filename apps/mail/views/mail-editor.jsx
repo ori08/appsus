@@ -16,15 +16,15 @@ export class MailEditor extends React.Component {
         return <section className="editor" style={{ display: display }} >
 
             <div className="editor-header" >
-                <h3 className="editor-header-messege">New Massege</h3>
+                <h3 className="editor-header-messege">New Message</h3>
                 <img onClick={() => onAddMail('close')} className="mail-icon exitBtn" src='assets/pics/asset 40.png' />
             </div>
             <form className="form-editor" onSubmit={() => onAddMail(event)}>
-                <div className="flex">
+                <div className="editor-line flex">
                     <h1 className="input-text">To</h1>
                     <input className="editor-input" type="mail" />
                 </div>
-                <div className="flex">
+                <div className="editor-line flex">
                     <h1 className="input-text">Subject</h1>
                     <input className="editor-input" type="text" />
                 </div>
