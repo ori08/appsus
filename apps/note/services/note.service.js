@@ -7,7 +7,9 @@ export const noteService = {
     getById,
     addNote,
     removeNote,
-    colorPicker
+    colorPicker,
+    editNote,
+    _loadFromStorage
 }
 
 export function query(filterBy) {
@@ -41,6 +43,31 @@ function _createNote(title, txt, url = null, yt = null, backgroundColor = 'trans
         },
         todos: []
     }
+}
+
+function editNote(noteId, title, txt, url, yt) {
+    let notes = _loadFromStorage()
+
+    notes.map(note => {
+        if (note.id === noteId) {
+            if (title) note.info.title = title
+            if (txt) note.info.txt = txt
+            if (url) note.info.url = url
+            if (yt) {
+                if (yt.includes('youtube')) {
+                    const embed = yt.split('=')
+                    note.info.yt = 'https://www.youtube.com/embed/' + embed[1]
+                }
+            }
+
+        }
+    })
+    _saveToStorage(notes)
+    let selectedNote
+    notes.map(note => {
+        if (note.id === noteId) selectedNote = note
+    })
+    return Promise.resolve(selectedNote)
 }
 
 // return {
@@ -141,7 +168,7 @@ function addNote(ev) {
     let yt = ev.target[3].value ? ev.target[3].value : null
     if (ev.target[3].value.includes('youtube')) {
         const embed = ev.target[3].value.split('=')
-        yt = 'https://www.youtube.com/embed/'+embed[1]
+        yt = 'https://www.youtube.com/embed/' + embed[1]
     }
 
     console.log('NEW NOTE:', note)

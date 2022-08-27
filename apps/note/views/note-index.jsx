@@ -8,12 +8,11 @@ export class NoteIndex extends React.Component {
     state = {
         notes: [],
         filterBy: null,
-        selectedNote: null
+        selectedNote: 'this is for a test okay?'
     }
 
     componentDidMount() {
         this.loadNotes()
-        console.log(this.state.notes)
     }
 
     loadNotes = () => {
@@ -27,7 +26,6 @@ export class NoteIndex extends React.Component {
                 // console.log({selectedNote})
                 this.setState({ selectedNote: note })
                 // noteService.getById(noteId)
-                console.log(note.id)
             })
     }
 
@@ -39,28 +37,29 @@ export class NoteIndex extends React.Component {
         })
     }
 
-    // onChangeColor = (noteId) => {
-    // onSetFilter = (filterBy) => {
-    //     this.setState({ filterBy }, this.loadNotes)
-    // }
 
-    onAddNote = (ev) => {
-        console.log(ev);
-        ev.preventDefault()
-        noteService.addNote(ev).then(note =>
-            this.loadNotes()
-        )
-    }
 
-    render() {
-        const { notes, selectedNote } = this.state
-        return (
-            <section className="main-index">
-                <NoteEditor notes={notes} />
-                <CreateNote onAddNote={this.onAddNote} />
-                <NoteList notes={notes} onRemoveNote={this.onRemoveNote} />
-                <div className="darken"></div>
-            </section>
-        )
-    }
+// onChangeColor = (noteId) => {
+// onSetFilter = (filterBy) => {
+//     this.setState({ filterBy }, this.loadNotes)
+// }
+
+onAddNote = (ev) => {
+    ev.preventDefault()
+    noteService.addNote(ev).then(note =>
+        this.loadNotes()
+    )
+}
+
+render() {
+    const { notes, selectedNote } = this.state
+    return (
+        <section className="main-index">
+            <NoteEditor selectedNote={selectedNote} updateNotes={this.updateNotes} />
+            <CreateNote onAddNote={this.onAddNote} />
+            <NoteList notes={notes} onRemoveNote={this.onRemoveNote} selectedNote={selectedNote} />
+            <div className="darken"></div>
+        </section>
+    )
+}
 }

@@ -1,6 +1,7 @@
 form.note-editor {
+
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0;
     top: 235px;
@@ -39,4 +40,3 @@ form.note-editor {
 .yt-url2 {
     display: none;
 }
-
