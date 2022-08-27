@@ -1,6 +1,7 @@
 const { Link } = ReactRouterDOM
 import { MailInfo } from "./mail-info"
 import { mailService } from "../services/mail.service.js"
+var isSelected = false
 
 export class MailList extends React.Component {
 
@@ -10,7 +11,11 @@ export class MailList extends React.Component {
 
     mark = (mailID, type) => {
 
-        mailService.markAsSelected(mailID, type).then(mail => {
+        mailService.markAsSelected(mailID, type).then((PromisePack) => {
+            const { selectedMailsCount } = PromisePack
+            const mail = PromisePack.markedMail
+            if (selectedMailsCount > 0) document.querySelector('.group-editor-mail-list').style.display = 'flex'
+            else document.querySelector('.group-editor-mail-list').style.display = 'none'
             this.setState({ mail: mail })
         })
     }
@@ -38,6 +43,11 @@ export class MailList extends React.Component {
             importent: 'assets/pics/asset 28.png'
         }
 
+        var restoreBtn
+        const filterType = mailService.loadFromStorage('filter')
+        if (filterType === 'trash') restoreBtn = 'mail-icon delete'
+        else restoreBtn = 'hide'
+
         if (mail.isStarrad) iconsImg.starrad = 'assets/pics/star-colord.png'
         if (mail.isSelected) iconsImg.selected = 'assets/pics/selected-box.png'
         return <article className="email-container flex" >
@@ -50,8 +60,8 @@ export class MailList extends React.Component {
             <h5 className="username" onClick={this.navigateTo} style={{ fontWeight: textWeight }}>{mail.username} </h5>
             <p className="massage" onClick={this.navigateTo} style={{ fontWeight: textWeight }}>{mail.massage}</p>
             <p className="date" onClick={this.navigateTo} style={{ fontWeight: textWeight }}>{mail.date}</p>
-            <img className="mail-icon delete " onClick={() => onRemoveMail(mail.id)} src="assets/pics/asset 30.png" />
-
+            <img className={restoreBtn} onClick={() => onRemoveMail(mail.id, 'restore')} src="assets/pics/asset 20.png" />
+            <img className="mail-icon delete " onClick={() => onRemoveMail(mail.id, 'remove')} src="assets/pics/asset 30.png" />
         </article>
     }
 }

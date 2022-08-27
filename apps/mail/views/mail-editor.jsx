@@ -38,10 +38,7 @@ export class MailEditor extends React.Component {
                     <img className="mail-icon " src='assets/pics/asset 55.png' />
                     <img className="mail-icon " src='assets/pics/asset 57.png' />
                     <img className="mail-icon " src='assets/pics/asset 58.png' />
-                    <img className="mail-icon " src='assets/pics/asset 59.png' />
-                    <img className="mail-icon " src='assets/pics/asset 60.png' />
-                    <img className="mail-icon " src='assets/pics/asset 61.png' />
-                    <img className="mail-icon " src='assets/pics/asset 16.png' />
+
                 </div>
             </form>
         </section >
