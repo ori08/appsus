@@ -10,10 +10,17 @@ export function AppHeader() {
         else
             grid.style.display = 'none'
     }
+<<<<<<< HEAD
     return <header className="app-header-notes">
         <Link to="/">
             <div className="flex">
                 <h1 className=" note-logo">AppsUs</h1>
+=======
+    return <header className="app-header">
+        <Link to="/">
+            <div className="flex">
+                <h1 className="logo note-logo">AppsUs</h1>
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
             </div>
         </Link>
         <nav>

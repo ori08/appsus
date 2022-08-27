@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 .apps-modal {
     background-color: white;
     position: absolute;
     width: 320px;
     height: 220px;
+=======
+.apps-modal{
+    background-color: white;
+    position: absolute;
+    width: 320px;
+    height:220px;
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     right: 40px;
     top: 48px;
     border-radius: 8px;
@@ -12,26 +20,43 @@
     z-index: 100;
 }
 
+<<<<<<< HEAD
 .grid {
+=======
+.grid{
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     display: none;
     gap: 5px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 
+<<<<<<< HEAD
 .bento-icon {
     font-size: 40px;
+=======
+.bento-icon{
+    font-size:40px;
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     cursor: pointer;
     margin: 5px;
 }
 
+<<<<<<< HEAD
 .bento-icon:hover {
+=======
+.bento-icon:hover{
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     transition: 0.2s;
     background-color: lightgrey;
     padding: 15px;
     border-radius: 20px;
 }
 
+<<<<<<< HEAD
 a.active {
+=======
+a.active{
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     margin: 0;
 }

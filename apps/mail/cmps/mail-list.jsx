@@ -48,6 +48,11 @@ export class MailList extends React.Component {
         if (filterType === 'trash') restoreBtn = 'mail-icon delete'
         else restoreBtn = 'hide'
 
+        var restoreBtn
+        const filterType = mailService.loadFromStorage('filter')
+        if (filterType === 'trash') restoreBtn = 'mail-icon delete'
+        else restoreBtn = 'hide'
+
         if (mail.isStarrad) iconsImg.starrad = 'assets/pics/star-colord.png'
         if (mail.isSelected) iconsImg.selected = 'assets/pics/selected-box.png'
         return <article className="email-container flex" >

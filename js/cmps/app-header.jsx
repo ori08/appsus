@@ -1,6 +1,10 @@
 import { eventBusService } from "../services/event-bus.service.js";
 const { Link, NavLink, withRouter } = ReactRouterDOM
+<<<<<<< HEAD
 var sidebarMode = false
+=======
+
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
 export function AppHeader() {
 
     function toggleBento() {
@@ -10,6 +14,7 @@ export function AppHeader() {
         else
             grid.style.display = 'none'
     }
+<<<<<<< HEAD
 
 
     return <header className="app-header">
@@ -31,6 +36,15 @@ export function AppHeader() {
         </div> */}
 
         <nav className="nav">
+=======
+    return <header className="app-header">
+        <Link to="/">
+            <div className="flex">
+                <h1 className="logo note-logo">AppsUs</h1>
+            </div>
+        </Link>
+        <nav>
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
             <div className="apps-modal grid flex align-center" style={{ display: 'none' }}>
                 <i class="fa-solid fa-book bento-icon" title="Books"></i>
                 <NavLink className="note-nav" to="/mail"><i class="fa-solid fa-at bento-icon" title="Email">
@@ -45,13 +59,19 @@ export function AppHeader() {
             </div>
             <img className="apps-icons" src="/assets/img/icons/appss.svg" alt="" onClick={toggleBento} />
         </nav>
+<<<<<<< HEAD
 
 
         <div className="addion-app"></div>
+=======
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
     </header>
 }
 
-
+{/* <NavLink exact to="/">Home</NavLink>
+<NavLink to="/about">About</NavLink>
+<NavLink to="/mail">Mail</NavLink>
+<NavLink to="/notes">Notes</NavLink> */}
 function navigateTo(location) {
     window.location.href = `index.html#/${location}`
     sidebarMode = false

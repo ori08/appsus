@@ -50,7 +50,7 @@ p:empty {
     display: none;
 }
 
-.darken {
+/* .darken {
     transition: 0.5s;
     position: absolute;
     width: 100%;

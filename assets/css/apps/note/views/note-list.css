@@ -1,5 +1,9 @@
 section.note-list {
     column-count: 4;
     column-gap: 5px;
+<<<<<<< HEAD
     column-width: 250px;
+=======
+    column-width:250px;
+>>>>>>> 04ff25c7094df5dc8bb2b9207155fd8f8f3971bc
 }
