@@ -1,9 +1,13 @@
+import { AppHeader } from "../cmps/app-header-notes.jsx"
 
 export function Home() {
 
-    return <section className="home flex justify-center">
-        <h1 className="logo logo-home animate__animated animate__backInDown">AppsUs</h1>
-        <p className="home-title animate__animated animate__backInUp">Your one place for everything.</p>
+    return <section>
+        <AppHeader />
+        <div className="home flex justify-center">
+            <h1 className="logo logo-home animate__animated animate__backInDown">AppsUs</h1>
+            <p className="home-title animate__animated animate__backInUp">Your one place for everything.</p>
+        </div>
     </section>
 }
 //GMAIL

@@ -12,7 +12,7 @@ header {
     border-bottom-width: 0px;
 }
 
-nav {
+.nav {
     display: flex;
     flex-basis: 23.5%;
     width: 23.5vw;
@@ -20,7 +20,7 @@ nav {
     padding-right: 10px;
 }
 
-nav p {
+.nav p {
 
     margin: .5em;
     font-family: ca;
@@ -47,10 +47,7 @@ nav p.active {
 }
 
 .burger-icon {
-    width: 25px;
-    height: 25px;
-    margin-left: 27px;
-    margin-right: 20px;
+    display: none;
 
 }
 
@@ -93,9 +90,78 @@ nav p.active {
 
 }
 
-
+.note-logo {
+    color: #202124;
+    font-family: Comfortaa;
+    font-size: 1.8rem;
+    margin-left: 8px;
+}
 
 .addion-app {
     flex-basis: 5.5%;
     /* width: 5.5%; */
+}
+
+.apps-icons {
+    width: 30px;
+    margin-right: 10px;
+    opacity: 85%;
+    cursor: pointer;
+}
+
+.app-header-notes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    border-bottom-width: 0px;
+
+
+}
+
+.app-header-back {
+    width: 100%;
+    height: 70px;
+    border-bottom-width: 0px;
+}
+
+
+@media (max-width: 900px) {
+    input.email-search-input {
+        min-width: 300px;
+        margin-left: 27px;
+
+    }
+
+    .nav {
+
+        flex-basis: 38.5%;
+        width: 38.5vw;
+        display: none;
+    }
+
+
+    .burger-icon {
+        display: flex;
+        width: 25px;
+        height: 25px;
+        margin-left: 28px;
+    }
+
+    .logo {
+        margin-left: 8px;
+        font-size: 21px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .app-header {
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .logo-conatiner {
+        align-items: center;
+    }
 }

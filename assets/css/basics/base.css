@@ -5,6 +5,7 @@ html {
 body {
     margin: 0;
     font-family: Roboto;
+    background-color: white;
 }
 
 h1,
@@ -55,4 +56,9 @@ p:empty {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0);
+    pointer-events: none;
+}
+
+.hide {
+    display: none;
 }

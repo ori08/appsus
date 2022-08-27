@@ -1,5 +1,5 @@
 import { utilService } from '../../../js/services/util.service.js'
-
+import { databaseMails } from './database-email.js'
 export const mailService = {
     getById,
     query,
@@ -13,11 +13,14 @@ export const mailService = {
     removeMail,
     loadFromStorage,
     filterBySearch,
-    markAsRead
+    markAsRead,
+    groupRemove
 }
 
 const KEY = 'mailsDB'
 const myMail = "orielgrabli@gmail.com"
+
+
 
 const defaultMails = {
     admin: {
@@ -64,6 +67,8 @@ const defaultMails = {
     }
 }
 
+// const database = databaseMails
+
 function getCurrDate() {
     const date = new Date().toISOString().substring(0, 10).split('-');
     const dateFormat = `${date[2]}.${date[1]}.${date[0]}`
@@ -81,7 +86,7 @@ function query(filterBy) {
         _saveToStorage(mails)
     }
     mails.map(mail => {
-        if (!mail.isRemoved) mailsToDisplay.push(mail)
+        if (!mail.isRemoved && mail.from !== myMail) mailsToDisplay.push(mail)
     })
     return Promise.resolve(mailsToDisplay)
 }
@@ -198,16 +203,12 @@ function markAsRead(mailId) {
 
 function _createMails() {
     const mails = []
-    for (let i = 0; i < 3; i++) {
-        switch (i) {
-            case 0: mails.push(defaultMails.admin)
-                break
-            case 1: mails.push(defaultMails.supportTeam)
-                break
-            case 2: mails.push(defaultMails.Spam)
-                break
-        }
+
+    for (let i = 0; i < databaseMails.length; i++) {
+        mails.push(databaseMails[i])
+
     }
+    saveToStorage('filter', 'all')
     return mails
 }
 
@@ -242,7 +243,7 @@ function filterBySearch(value) {
 function markAsSelected(mailId, type) {
     let mails = _loadFromStorage()
     let markedMail = null
-
+    let selectedMailsCount = 0
     switch (type) {
         case 'starrad': {
             mails.map(mail => {
@@ -256,9 +257,16 @@ function markAsSelected(mailId, type) {
             break
         case 'selected': {
             mails.map(mail => {
+                if (mail.isSelected) selectedMailsCount++
                 if (mail.id === mailId) {
-                    if (mail.isSelected) mail.isSelected = false
-                    else mail.isSelected = true
+                    if (mail.isSelected) {
+                        mail.isSelected = false
+                        selectedMailsCount--
+                    }
+                    else {
+                        mail.isSelected = true
+                        selectedMailsCount++
+                    }
                     markedMail = mail
                 }
             })
@@ -275,28 +283,54 @@ function markAsSelected(mailId, type) {
         }
             break
     }
-
+    let promisePack = {
+        markedMail,
+        selectedMailsCount
+    }
     _saveToStorage(mails)
-    return Promise.resolve(markedMail)
+    return Promise.resolve(promisePack)
 }
 
-function removeMail(mailId) {
+function removeMail(mailId, parameter) {
     let mails = _loadFromStorage()
     var isRemoved
+    var isRestored
     mails.map(mail => {
-        if (mail.id === mailId && !mail.isRemoved) isRemoved = false
+        if (mail.id === mailId && parameter === 'restore') {
+            mail.isRemoved = false
+            isRestored = true
+        }
+        if (isRestored) return
+        else if (mail.id === mailId && !mail.isRemoved) isRemoved = false
         else if (mail.id === mailId && mail.isRemoved) isRemoved = true
     })
-    if (!isRemoved) {
-        mails.map(mail => { if (mail.id === mailId) return mail.isRemoved = true })
+    if (isRestored) {
         _saveToStorage(mails)
         return Promise.resolve(mails)
     }
     else {
-        mails = mails.filter(mail => mail.id !== mailId)
-        _saveToStorage(mails)
-        return Promise.resolve()
+        if (!isRemoved) {
+            mails.map(mail => {
+                if (mail.id === mailId) return mail.isRemoved = true
+            })
+            _saveToStorage(mails)
+            return Promise.resolve(mails)
+        }
+        else {
+            mails = mails.filter(mail => mail.id !== mailId)
+            _saveToStorage(mails)
+            return Promise.resolve()
+        }
     }
+}
+
+function groupRemove() {
+    let mails = _loadFromStorage()
+    mails.map(mail => {
+        if (mail.isSelected) mail.isRemoved = true
+    })
+    _saveToStorage(mails)
+    return Promise.resolve()
 }
 
 function _saveToStorage(mails) {

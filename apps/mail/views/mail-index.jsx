@@ -16,22 +16,18 @@ export class MailIndex extends React.Component {
         isNewMail: false,
     }
 
-
-
     componentDidMount() {
-
         if (mailService.loadFromStorage('filter')) {
-            console.log("uyuyusyuasyausyausyau");
             const filterBy = mailService.loadFromStorage('filter')
             this.onFilterBy(filterBy)
         }
         else this.loadMails()
-
     }
 
     componentDidUpdate() {
         eventBusService.on('s', value => {
-            this.onSearch(value)
+            if (value) this.onSearch(value)
+            else this.loadMails()
         })
 
 
@@ -46,6 +42,7 @@ export class MailIndex extends React.Component {
 
 
     loadMails = () => {
+
         mailService.query(this.state.filterBy)
             .then((mails) => this.setState({ mails }))
     }
@@ -71,16 +68,16 @@ export class MailIndex extends React.Component {
         this.props.history.push('/mail')
     }
 
-    onRemoveMail = (mailId) => {
+    onRemoveMail = (mailId, parameter) => {
 
-        mailService.removeMail(mailId).then(this.onFilterBy(this.state.filterBy))
+        mailService.removeMail(mailId, parameter).then(this.onFilterBy(this.state.filterBy))
 
     }
 
     listen = () => {
         var { isNewMail } = this.state
         this.setState({ isNewMail: !isNewMail })
-        toggleDarken()
+
     }
 
 
@@ -100,6 +97,10 @@ export class MailIndex extends React.Component {
         this.listen()
     }
 
+    onGroupRemove = () => {
+        mailService.groupRemove().then(this.onFilterBy(this.state.filterBy))
+    }
+
     render() {
         var mailDisplay = "flex"
         var editorDisplay = "none"
@@ -109,16 +110,14 @@ export class MailIndex extends React.Component {
         if (isNewMail) mailDisplay = "none"
         else mailDisplay = "flex"
 
-
-        // <div className="mail-list-container" style={{ display: mailDisplay }}>
-
         return <section className="mail-app">
-
+            <AppHeader />
             <div className="flex">
 
                 <MailSideBar mails={mails} onFilterBy={this.onFilterBy} listen={this.listen} />
 
-                <MailContainer mails={mails} onRemoveMail={this.onRemoveMail} hideMain={this.hideMain} />
+                <MailContainer mails={mails} onRemoveMail={this.onRemoveMail}
+                    hideMain={this.hideMain} onGroupRemove={this.onGroupRemove} />
 
                 {/* <MailInfo mails={mails} /> */}
 
@@ -129,19 +128,4 @@ export class MailIndex extends React.Component {
             </div>
         </section>
     }
-}
-
-// function onAddMail(ev) {
-//     ev.preventDefault()
-//     mailService.addNewMail(ev).then(
-//         window.location.href = 'index.html#/mail'
-//     )
-// }
-// export { onAddMail }   
-function toggleDarken() {
-    const dark = document.querySelector('body')
-    if (dark.style.backgroundColor === 'rgba(0, 0, 0, 0)')
-        dark.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
-    else
-        dark.style.backgroundColor = 'rgba(0, 0, 0, 0)'
 }

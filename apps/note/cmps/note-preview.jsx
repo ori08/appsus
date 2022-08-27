@@ -15,19 +15,19 @@ export class NotePreview extends React.Component {
     }
 
 
-componentDidMount(){
-let x= null
-    eventBusService.on('s', note=>{
-        console.log(note);
-        if(!note)return
-      if(this.state.note.id===note.id)this.setState({note})
-       
-    })
-// console.log('last print ');
-// if(x)console.log(x);
+    componentDidMount() {
+        let x = null
+        eventBusService.on('s', note => {
+            console.log(note);
+            if (!note) return
+            if (this.state.note.id === note.id) this.setState({ note })
+
+        })
+        // console.log('last print ');
+        // if(x)console.log(x);
 
 
-}
+    }
 
 
     onColorPicker = (color) => {
