@@ -1,6 +1,6 @@
 import { MailEditor } from "../views/mail-editor"
 import { mailService } from "../services/mail.service.js"
-
+import { AppHeader, toogleSideBar } from "../../../js/cmps/app-header.jsx"
 const { Link } = ReactRouterDOM
 
 const defaltColor = "rgb(246, 248, 252)"
@@ -124,6 +124,7 @@ export class MailSideBar extends React.Component {
         })
         mailService.saveToStorage('filter', filterType)
         onFilterBy(filterType)
+        // if (window.innerWidth < 400) document.querySelector('.mail-side-bar').style.display = "none"
 
     }
 

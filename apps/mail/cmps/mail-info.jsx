@@ -24,33 +24,29 @@ export class MailInfo extends React.Component {
             })
     }
 
-    // toogleReply = () => {
-
-    // }
 
     render() {
         const { mail } = this.state
         if (!mail) return
 
         var linkFrom = 'info'
+        // var classs = null
+        // if (window.innerWidth < 450) classs = 'mail-side-bar'
+        // else classs = "hide"
+        console.log(document.querySelector('.mail-info'));
+        if (window.innerWidth > 450) {
+            if (document.querySelector('.mail-info-container')) document.querySelector('.mail-info-container').style.display = 'flex'
+        }
 
         return <section >
-
-            <div className="flex">
+            {(window.innerWidth < 450) && <MailSideBar linkfrom={linkFrom} />}
+            <div className="mail-info  ">
                 {<div className="mail-side-bar">
                     <MailSideBar linkfrom={linkFrom} />
                 </div>}
 
                 <div className="mail-info-container">
 
-                    <div className="tool-bar">
-                        <img className="compose-icon" src="assets/pics/asset 29.png" />
-                        <img className="mail-icon" src="assets/pics/asset 17.png" />
-                        <img className="mail-icon" src="assets/pics/asset 30.png" />
-                        <img className="mail-icon" src="assets/pics/asset 34.png" />
-                        <img className="mail-icon" src="assets/pics/asset 32.png" />
-                        <img className="mail-icon" src="assets/pics/asset 16.png" />
-                    </div>
 
                     <div className="padding-mail-info">
                         <h1>Sent From: {mail.username} </h1>
@@ -64,9 +60,10 @@ export class MailInfo extends React.Component {
                 {/* <div className="additional-app">
                     <AdditionalApp />
                 </div> */}
-            </div>
+                {/* </div> */}
 
-        </section>
+            </div>
+        </section >
     }
 }
 

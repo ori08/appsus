@@ -23,7 +23,8 @@
 /* Email */
 @import './apps/email/views/mail-list.css';
 @import './apps/email/views/mail-editor.css';
-
+@import './apps/email/views/mail-buttons.css';
+@import './apps/email/views/side-bar.css';
 /* Notes */
 
 @import 'apps/note/views/note-preview.css';
@@ -31,4 +32,3 @@
 @import 'apps/note/views/note-list.css';
 @import 'apps/note/views/note-editor.css';
 @import 'apps/note/views/note-filter.css';
-@import './apps/apps-modal.css';
