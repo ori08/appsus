@@ -39,27 +39,49 @@ export class NoteIndex extends React.Component {
 
 
 
-// onChangeColor = (noteId) => {
-// onSetFilter = (filterBy) => {
-//     this.setState({ filterBy }, this.loadNotes)
-// }
+    // onChangeColor = (noteId) => {
+    // onSetFilter = (filterBy) => {
+    //     this.setState({ filterBy }, this.loadNotes)
+    // }
 
-onAddNote = (ev) => {
-    ev.preventDefault()
-    noteService.addNote(ev).then(note =>
-        this.loadNotes()
-    )
-}
+    onAddNote = (ev) => {
+        ev.preventDefault()
+        noteService.addNote(ev).then(note =>
+            this.loadNotes()
+        )
+    }
 
-render() {
-    const { notes, selectedNote } = this.state
-    return (
-        <section className="main-index">
-            <NoteEditor selectedNote={selectedNote} updateNotes={this.updateNotes} />
-            <CreateNote onAddNote={this.onAddNote} />
-            <NoteList notes={notes} onRemoveNote={this.onRemoveNote} selectedNote={selectedNote} />
-            <div className="darken"></div>
-        </section>
-    )
-}
+    onFilterBy = (filterBy) => {
+        console.log('filtering...')
+        this.state.filterBy = filterBy
+        console.log(this.state.filterBy);
+        noteService.query(filterBy).then(notes => {
+            this.setState(notes = { notes })
+        })
+
+
+        // noteService.filterBy(filterBy).then(notes => {
+        //     this.setState(notes = { notes })
+        // })
+    }
+
+    render() {
+        const { notes, selectedNote } = this.state
+        console.log(notes)
+        return (
+            <section className="main-index main-layout">
+
+                <NoteEditor selectedNote={selectedNote} updateNotes={this.updateNotes} />
+                <CreateNote onAddNote={this.onAddNote} />
+                <section className="filter-selection">
+                    <button onClick={() => this.onFilterBy(null)}><i class="fa-solid fa-xmark"></i></button>
+                    <button onClick={() => this.onFilterBy('text')}><i class="fa-solid fa-font"></i></button>
+                    <button onClick={() => this.onFilterBy('img')}><i class="fa-solid fa-image"></i></button>
+                    <button onClick={() => this.onFilterBy('yt')}><i class="fa-brands fa-youtube"></i></button>
+                </section>
+                <NoteList notes={notes} onRemoveNote={this.onRemoveNote} selectedNote={selectedNote} />
+                <div className="darken"></div>
+            </section>
+        )
+    }
 }

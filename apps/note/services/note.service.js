@@ -2,6 +2,7 @@ import { utilService } from "../../../js/services/util.service.js"
 
 const KEY = 'notesDB'
 let notes = []
+
 export const noteService = {
     query,
     getById,
@@ -12,7 +13,7 @@ export const noteService = {
     _loadFromStorage
 }
 
-export function query(filterBy) {
+function query(filterBy) {
     notes = _loadFromStorage()
     if (!notes) {
         notes = _createNotes()
@@ -20,17 +21,21 @@ export function query(filterBy) {
     }
 
     if (filterBy) {
-        return console.log('nada')
+        let filteredNotes = notes.filter(note => note.type === filterBy)
+        return Promise.resolve(filteredNotes)
     }
 
     return Promise.resolve(notes)
 }
 
-function _createNote(title, txt, url = null, yt = null, backgroundColor = 'transparent') {
-
+function _createNote(title, txt, url = null, yt = null, backgroundColor = 'transparent', type = 'text') {
+    if (url)
+        type = 'img'
+    if (yt)
+        type = 'yt'
     return {
         id: utilService.makeId(),
-        type: 'text',
+        type,
         isPinned: false,
         info: {
             title,
@@ -52,14 +57,17 @@ function editNote(noteId, title, txt, url, yt) {
         if (note.id === noteId) {
             if (title) note.info.title = title
             if (txt) note.info.txt = txt
-            if (url) note.info.url = url
+            if (url) {
+                note.type = 'img'
+                note.info.url = url
+            }
             if (yt) {
                 if (yt.includes('youtube')) {
+                    note.type = 'yt'
                     const embed = yt.split('=')
                     note.info.yt = 'https://www.youtube.com/embed/' + embed[1]
                 }
             }
-
         }
     })
     _saveToStorage(notes)
@@ -70,20 +78,6 @@ function editNote(noteId, title, txt, url, yt) {
     return Promise.resolve(selectedNote)
 }
 
-// return {
-//     id: utilService.makeId(),
-//     type: 'text',
-//     isPinned: false,
-//     info: {
-//         title,
-//         txt,
-//         url,
-//     },
-//     style: {
-//         backgroundColor
-//     },
-//     todos: []
-// }
 function colorPicker(noteId, color) {
     let notes = _loadFromStorage()
     var selectedNote = null
@@ -97,31 +91,12 @@ function colorPicker(noteId, color) {
     return Promise.resolve(selectedNote)
 }
 
-
-
 function _createNotes() {
     const notes = []
     for (let i = 0; i < expNotes.length; i++) {
         notes.push(expNotes[i])
     }
     return notes
-}
-
-function _saveToStorage(notes) {
-    saveToStorage(KEY, notes)
-}
-
-function _loadFromStorage() {
-    return loadFromStorage(KEY)
-}
-
-function saveToStorage(key, val) {
-    localStorage.setItem(key, JSON.stringify(val))
-}
-
-function loadFromStorage(key) {
-    var val = localStorage.getItem(key)
-    return JSON.parse(val)
 }
 
 function getById(noteId) {
@@ -171,10 +146,7 @@ function addNote(ev) {
         yt = 'https://www.youtube.com/embed/' + embed[1]
     }
 
-    console.log('NEW NOTE:', note)
-    console.log('NEW TEST NOTE:', noteTest)
     notes.push(_createNote(title, txt, url, yt))
-    console.log('notes', notes)
 
     saveToStorage(KEY, notes)
     return Promise.resolve()
@@ -192,6 +164,23 @@ function removeNote(noteId) {
     _saveToStorage(notes)
 
     return Promise.resolve()
+}
+
+function _saveToStorage(notes) {
+    saveToStorage(KEY, notes)
+}
+
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
+
+function _loadFromStorage() {
+    return loadFromStorage(KEY)
+}
+
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
 }
 
 const expNotes = [
