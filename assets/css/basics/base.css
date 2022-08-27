@@ -23,7 +23,7 @@ a {
 }
 
 p {
-    margin-block-end: 0px;
+    /* margin-block-end: 0px; */
     font-size: 14px;
 }
 
@@ -55,5 +55,4 @@ p:empty {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0);
-    pointer-events: none;
 }

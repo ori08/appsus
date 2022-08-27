@@ -2,10 +2,13 @@
 import { mailService } from '../services/mail.service.js';
 import { MailSideBar } from './side-bar.jsx';
 import { AdditionalApp } from '../cmps/additional-app.jsx';
+
+
 export class MailInfo extends React.Component {
 
     state = {
-        mail: null
+        mail: null,
+        ShowUp: false
     }
 
     componentDidMount() {
@@ -16,21 +19,28 @@ export class MailInfo extends React.Component {
         const { mailId } = this.props.match.params
         mailService.getById(mailId)
             .then(mail => {
-                // if (!mail) return this.onGoBack()
+                console.log(mail);
                 this.setState(mail = { mail })
             })
     }
 
+    // toogleReply = () => {
+
+    // }
 
     render() {
         const { mail } = this.state
         if (!mail) return
-        // if (!mail) return ''
+
+        var linkFrom = 'info'
+
         return <section >
+
             <div className="flex">
-                <div className="mail-side-bar">
-                    <MailSideBar />
-                </div>
+                {<div className="mail-side-bar">
+                    <MailSideBar linkfrom={linkFrom} />
+                </div>}
+
                 <div className="mail-info-container">
 
                     <div className="tool-bar">
@@ -47,11 +57,23 @@ export class MailInfo extends React.Component {
                         <h4>Subject: {mail.subject}</h4>
                         <p>{mail.massage}</p>
                     </div>
+
+                    {/* <button onClick={() => this.toogleReply()}>reply</button> */}
                 </div>
-                <div className="additional-app">
+                {/* <ReplyEditor /> */}
+                {/* <div className="additional-app">
                     <AdditionalApp />
-                </div>
+                </div> */}
             </div>
+
         </section>
     }
+}
+
+
+
+function replyEditor() {
+
+
+
 }

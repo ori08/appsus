@@ -6,10 +6,14 @@ export const mailService = {
     getVendors,
     save,
     _loadFromStorage,
+    saveToStorage,
     addNewMail,
     filterBy,
     markAsSelected,
-    removeMail
+    removeMail,
+    loadFromStorage,
+    filterBySearch,
+    markAsRead
 }
 
 const KEY = 'mailsDB'
@@ -104,7 +108,7 @@ function filterBy(filterBy) {
             break
         case 'all': {
             mails.map(mail => {
-                if (!mail.isRemoved) filterMails.push(mail)
+                if (!mail.isRemoved && mail.from !== myMail) filterMails.push(mail)
             })
             return Promise.resolve(filterMails)
 
@@ -113,6 +117,20 @@ function filterBy(filterBy) {
         case 'starred': {
             mails.map(mail => {
                 if (mail.isStarrad && !mail.isRemoved) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+        }
+            break
+        case 'read': {
+            mails.map(mail => {
+                if (mail.isRead && !mail.isRemoved) filterMails.push(mail)
+            })
+            return Promise.resolve(filterMails)
+        }
+            break
+        case 'unread': {
+            mails.map(mail => {
+                if (!mail.isRead && !mail.isRemoved) filterMails.push(mail)
             })
             return Promise.resolve(filterMails)
         }
@@ -163,10 +181,19 @@ function _createMail(username, subject, massage) {
         isImportant: false,
         isRemoved: false,
         isSelected: false,
-        date: null
+        date: getCurrDate()
     }
 
     return mail
+}
+
+function markAsRead(mailId) {
+    let mails = _loadFromStorage()
+    mails.map(mail => {
+        if (mail.id === mailId) mail.isRead = true
+    })
+    _saveToStorage(mails)
+    return
 }
 
 function _createMails() {
@@ -194,6 +221,22 @@ function addNewMail(ev) {
     mails.unshift(mail)
     _saveToStorage(mails)
     return Promise.resolve()
+}
+
+function filterBySearch(value) {
+    var lowercase = value.charAt(0).toLowerCase() + value.substring(1, value.length)
+
+    let mails = _loadFromStorage()
+    let mailsToDisplay = []
+    mails.map(mail => {
+        const txt = value.toLowerCase()
+        const messege = mail.massage.toLowerCase()
+        const subject = mail.subject.toLowerCase()
+        const email = mail.from.toLowerCase()
+        if (messege.includes(txt) || subject.includes(txt) || email.includes(txt)) mailsToDisplay.push(mail)
+    })
+    return Promise.resolve(mailsToDisplay)
+
 }
 
 function markAsSelected(mailId, type) {

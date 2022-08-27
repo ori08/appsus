@@ -4,6 +4,9 @@ import { MailContainer } from '../cmps/mail-container.jsx';
 import { MailSideBar } from '../cmps/side-bar.jsx';
 import { AdditionalApp } from '../cmps/additional-app.jsx';
 import { MailEditor } from './mail-editor.jsx';
+import { MailInfo } from '../cmps/mail-info.jsx';
+import { AppHeader } from '../../../js/cmps/app-header.jsx';
+import { eventBusService } from '../../../js/services/event-bus.service.js';
 
 const { Link } = ReactRouterDOM
 export class MailIndex extends React.Component {
@@ -16,9 +19,31 @@ export class MailIndex extends React.Component {
 
 
     componentDidMount() {
-        console.log('this.props', this.props);
-        this.loadMails()
+
+        if (mailService.loadFromStorage('filter')) {
+            console.log("uyuyusyuasyausyausyau");
+            const filterBy = mailService.loadFromStorage('filter')
+            this.onFilterBy(filterBy)
+        }
+        else this.loadMails()
+
     }
+
+    componentDidUpdate() {
+        eventBusService.on('s', value => {
+            this.onSearch(value)
+        })
+
+
+    }
+
+    onSearch = (value) => {
+        console.log(value);
+        mailService.filterBySearch(value).then(mails => {
+            this.setState({ mails })
+        })
+    }
+
 
     loadMails = () => {
         mailService.query(this.state.filterBy)
@@ -55,6 +80,7 @@ export class MailIndex extends React.Component {
     listen = () => {
         var { isNewMail } = this.state
         this.setState({ isNewMail: !isNewMail })
+        toggleDarken()
     }
 
 
@@ -70,11 +96,16 @@ export class MailIndex extends React.Component {
         }
     }
 
+    hideMain = () => {
+        this.listen()
+    }
+
     render() {
         var mailDisplay = "flex"
         var editorDisplay = "none"
         const { mails } = this.state
         const { isNewMail } = this.state
+
         if (isNewMail) mailDisplay = "none"
         else mailDisplay = "flex"
 
@@ -82,16 +113,19 @@ export class MailIndex extends React.Component {
         // <div className="mail-list-container" style={{ display: mailDisplay }}>
 
         return <section className="mail-app">
+
             <div className="flex">
 
                 <MailSideBar mails={mails} onFilterBy={this.onFilterBy} listen={this.listen} />
 
-                <MailContainer mails={mails} onRemoveMail={this.onRemoveMail} />
+                <MailContainer mails={mails} onRemoveMail={this.onRemoveMail} hideMain={this.hideMain} />
+
+                {/* <MailInfo mails={mails} /> */}
 
                 <MailEditor onAddMail={this.onAddMail} isNewMail={isNewMail} />
 
                 <AdditionalApp />
-
+                <div className="darken-email"></div>
             </div>
         </section>
     }
@@ -104,3 +138,10 @@ export class MailIndex extends React.Component {
 //     )
 // }
 // export { onAddMail }   
+function toggleDarken() {
+    const dark = document.querySelector('body')
+    if (dark.style.backgroundColor === 'rgba(0, 0, 0, 0)')
+        dark.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    else
+        dark.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+}
