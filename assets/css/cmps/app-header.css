@@ -11,6 +11,15 @@ header {
     height: 70px;
     border-bottom-width: 0px;
 }
+<<<<<<< HEAD
+.app-header-back {
+    width: 100%;
+    height: 70px;
+    border-bottom-width: 0px;
+}
+nav a {
+    margin: .5em;
+=======
 
 nav {
     display: flex;
@@ -18,6 +27,7 @@ nav {
     width: 23.5vw;
     justify-content: flex-end;
     padding-right: 10px;
+>>>>>>> d8eba52dd3f1f208ef9ace8d0af9d8010771afff
 }
 
 nav p {

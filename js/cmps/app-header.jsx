@@ -3,6 +3,23 @@ const { Link, NavLink, withRouter } = ReactRouterDOM
 var sidebarMode = false
 export function AppHeader() {
 
+<<<<<<< HEAD
+    return <header className="app-header-back">
+        <section className="app-header main-layout">
+            <Link to="/">
+                <div className="flex">
+                    <h1 className="logo">AppsUs</h1>
+                </div>
+            </Link>
+            <nav>
+                <NavLink exact to="/">Home</NavLink>
+                <NavLink to="/about">About</NavLink>
+                <NavLink to="/mail">Mail</NavLink>
+                <NavLink to="/notes">Notes</NavLink>
+            </nav>
+        </section>
+
+=======
     return <header className="app-header">
 
         <div className="logo-conatiner flex">
@@ -20,6 +37,7 @@ export function AppHeader() {
             <p onClick={() => navigateTo('notes')}>Notes</p>
         </nav>
         <div className="addion-app"></div>
+>>>>>>> d8eba52dd3f1f208ef9ace8d0af9d8010771afff
     </header>
 }
 

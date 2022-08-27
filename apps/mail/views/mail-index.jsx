@@ -111,7 +111,7 @@ export class MailIndex extends React.Component {
         else mailDisplay = "flex"
 
         return <section className="mail-app">
-
+            <AppHeader />
             <div className="flex">
 
                 <MailSideBar mails={mails} onFilterBy={this.onFilterBy} listen={this.listen} />
