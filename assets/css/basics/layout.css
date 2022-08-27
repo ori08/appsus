@@ -45,7 +45,7 @@
     }
 
     .darken {
-        bottom: 0 !important;
+        top: 300px;
     }
 
 }

@@ -60,10 +60,12 @@ img.note-icon:hover {
     margin: 10px;
     max-width: 90%;
     word-wrap: break-word;
+    color: #202124;
 }
 
 .note-title {
     margin: 10px;
+    color: #202124;
 }
 
 input.color-picker {

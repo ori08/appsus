@@ -13,7 +13,7 @@ const { Route, Switch } = ReactRouterDOM
 export function App() {
     return <Router>
         <section className="app">
-            <AppHeader />
+            {/* <AppHeader /> */}
             <Switch>
                 <Route path="/mail/info/:mailId?" component={MailInfo} />
                 <Route path="/mail" component={MailIndex} />

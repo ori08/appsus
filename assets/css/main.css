@@ -17,6 +17,7 @@
 @import './cmps/user-msg.css';
 @import './cmps/app-header.css';
 
+@import './assets/css/apps/apps-modal.css';
 /* Books */
 
 /* Email */
@@ -30,3 +31,4 @@
 @import 'apps/note/views/note-list.css';
 @import 'apps/note/views/note-editor.css';
 @import 'apps/note/views/note-filter.css';
+@import './apps/apps-modal.css';
